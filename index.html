@@ -5,291 +5,1364 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>TA2 - SENTENCE BUILDING | Trường Cao Đẳng Công Nghệ Thủ Đức (TDC)</title>
   <link rel="icon" type="image/png" href="logo-tdc.png">
-  <link rel="stylesheet" href="css/style.css">
+  <style>
+/* ==========================================================================
+   CSS STYLES - TA2: SENTENCE BUILDING (40 MULTIPLE-CHOICE QUESTIONS)
+   Trường Cao đẳng Công nghệ Thủ Đức (TDC)
+   Giao diện chuẩn theo mẫu tham khảo (100% tương thích GitHub Pages & Mobile)
+   ========================================================================== */
+
+:root {
+  --tdc-navy-dark: #002244;
+  --tdc-navy: #003366;
+  --tdc-navy-light: #004b87;
+  --tdc-amber: #f59e0b;
+  --tdc-amber-hover: #d97706;
+  --tdc-yellow: #facc15;
+  --bg-page: #f1f5f9;
+  --bg-card: #ffffff;
+  --text-main: #1e293b;
+  --text-muted: #64748b;
+  --border-color: #cbd5e1;
+  --border-light: #e2e8f0;
+  --success: #10b981;
+  --success-bg: #ecfdf5;
+  --success-border: #a7f3d0;
+  --danger: #ef4444;
+  --danger-bg: #fef2f2;
+  --danger-border: #fecaca;
+  --warning: #f59e0b;
+  --warning-bg: #fffbeb;
+  --radius-sm: 8px;
+  --radius-md: 12px;
+  --radius-lg: 16px;
+  --radius-pill: 30px;
+  --shadow-sm: 0 1px 3px rgba(0,0,0,0.08);
+  --shadow-md: 0 4px 12px rgba(0,0,0,0.08);
+  --shadow-lg: 0 10px 25px rgba(0,0,0,0.15);
+  --font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: var(--font-family);
+  background-color: var(--bg-page);
+  color: var(--text-main);
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ================= TOP HEADER (MATCHES USER REFERENCE SCREENSHOT) ================= */
+.header-wrapper {
+  background: linear-gradient(90deg, #002b55 0%, #003e75 40%, #004e8c 70%, #00386b 100%);
+  border-bottom: 2px solid #001f3f;
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  box-shadow: 0 3px 12px rgba(0, 0, 0, 0.28);
+  padding: 7px 0;
+}
+
+.header-container {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 0 16px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+/* Left Brand Area */
+.brand-section {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.logo-white-card {
+  background: #ffffff;
+  padding: 3px 8px;
+  border-radius: 6px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+  height: 42px;
+}
+
+.tdc-logo-img {
+  height: 36px;
+  width: auto;
+  object-fit: contain;
+}
+
+.brand-title-wrap {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.brand-main-title {
+  color: #ffffff;
+  font-size: 1.15rem;
+  font-weight: 800;
+  letter-spacing: 0.5px;
+  white-space: nowrap;
+}
+
+.badge-ta2 {
+  background: var(--tdc-amber);
+  color: #0f172a;
+  font-size: 0.72rem;
+  font-weight: 900;
+  padding: 2px 7px;
+  border-radius: 6px;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+}
+
+/* Controls Area (Right) */
+.header-controls {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+/* Time & Progress Pill */
+.status-pill-group {
+  background: rgba(0, 18, 45, 0.55);
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  border-radius: var(--radius-pill);
+  padding: 6px 16px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  color: #ffffff;
+  font-size: 0.88rem;
+  backdrop-filter: blur(4px);
+}
+
+.status-pill-item {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.status-divider {
+  width: 1px;
+  height: 16px;
+  background: rgba(255, 255, 255, 0.25);
+}
+
+.timer-digits {
+  color: #ffffff;
+  font-weight: 800;
+  font-family: 'Courier New', Courier, monospace;
+  font-size: 1rem;
+  letter-spacing: 0.5px;
+}
+
+.highlight-val {
+  color: var(--tdc-yellow);
+  font-weight: 800;
+}
+
+/* Visitor Counter Pill */
+.visitor-pill {
+  background: rgba(0, 18, 45, 0.55);
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  border-radius: var(--radius-pill);
+  padding: 6px 14px;
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  color: #ffffff;
+  font-size: 0.88rem;
+  backdrop-filter: blur(4px);
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.visitor-pill:hover {
+  background: rgba(0, 28, 65, 0.75);
+  border-color: rgba(255, 255, 255, 0.35);
+}
+
+.live-green-dot {
+  width: 8px;
+  height: 8px;
+  background-color: #10b981;
+  border-radius: 50%;
+  display: inline-block;
+  box-shadow: 0 0 0 2px rgba(16, 185, 129, 0.3);
+  animation: pulseDot 2s infinite;
+}
+
+@keyframes pulseDot {
+  0% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.7); }
+  70% { transform: scale(1); box-shadow: 0 0 0 5px rgba(16, 185, 129, 0); }
+  100% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(16, 185, 129, 0); }
+}
+
+/* Yellow Button: Nhập Họ tên & MSSV */
+.btn-student-info {
+  background: var(--tdc-amber);
+  color: #0f172a;
+  border: none;
+  border-radius: var(--radius-pill);
+  padding: 6px 16px;
+  font-size: 0.88rem;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  cursor: pointer;
+  box-shadow: 0 2px 6px rgba(245, 158, 11, 0.3);
+  transition: all 0.2s;
+  white-space: nowrap;
+}
+
+.btn-student-info:hover {
+  background: var(--tdc-amber-hover);
+  transform: translateY(-1px);
+}
+
+/* Translucent Button: Thống kê */
+.btn-stats {
+  background: rgba(255, 255, 255, 0.16);
+  color: #ffffff;
+  border: 1px solid rgba(255, 255, 255, 0.26);
+  border-radius: var(--radius-pill);
+  padding: 6px 16px;
+  font-size: 0.88rem;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  cursor: pointer;
+  backdrop-filter: blur(4px);
+  transition: all 0.2s;
+  white-space: nowrap;
+}
+
+.btn-stats:hover {
+  background: rgba(255, 255, 255, 0.26);
+  border-color: rgba(255, 255, 255, 0.4);
+  transform: translateY(-1px);
+}
+
+/* ================= MAIN CONTAINER ================= */
+.main-layout {
+  max-width: 1400px;
+  margin: 18px auto;
+  padding: 0 16px;
+  display: grid;
+  grid-template-columns: 1fr 340px;
+  gap: 22px;
+  align-items: start;
+}
+
+/* Student & Exam Info Card */
+.exam-meta-card {
+  background: #ffffff;
+  border: 1px solid var(--border-light);
+  border-radius: var(--radius-md);
+  padding: 14px 18px;
+  margin-bottom: 18px;
+  box-shadow: var(--shadow-sm);
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  border-left: 5px solid var(--tdc-amber);
+}
+
+.exam-meta-left {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+
+.exam-subject-name {
+  font-size: 1.12rem;
+  font-weight: 700;
+  color: var(--tdc-navy);
+}
+
+.exam-meta-sub {
+  font-size: 0.84rem;
+  color: var(--text-muted);
+}
+
+.student-info-tags {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.student-tag {
+  background: #f8fafc;
+  border: 1px solid var(--border-light);
+  padding: 4px 10px;
+  border-radius: 6px;
+  font-size: 0.83rem;
+  color: var(--text-main);
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.student-tag strong {
+  color: var(--tdc-navy);
+}
+
+/* ================= RESULTS SUMMARY BANNER (AFTER SUBMIT) ================= */
+.results-summary-card {
+  background: linear-gradient(135deg, #002b55 0%, #004e8c 100%);
+  color: #ffffff;
+  border-radius: var(--radius-lg);
+  padding: 24px;
+  margin-bottom: 22px;
+  box-shadow: var(--shadow-lg);
+  display: none;
+  animation: slideDown 0.4s ease-out;
+}
+
+@keyframes slideDown {
+  from { opacity: 0; transform: translateY(-15px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.results-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+  gap: 16px;
+  align-items: center;
+  text-align: center;
+}
+
+.score-circle-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.score-display {
+  font-size: 2.8rem;
+  font-weight: 900;
+  line-height: 1;
+  color: var(--tdc-yellow);
+  text-shadow: 0 2px 8px rgba(0,0,0,0.25);
+}
+
+.score-scale-10 {
+  font-size: 1.1rem;
+  font-weight: 700;
+  margin-top: 4px;
+  color: #e0f2fe;
+}
+
+.result-stat-box {
+  background: rgba(255, 255, 255, 0.12);
+  backdrop-filter: blur(8px);
+  padding: 14px;
+  border-radius: var(--radius-md);
+  border: 1px solid rgba(255, 255, 255, 0.18);
+}
+
+.result-stat-value {
+  font-size: 1.6rem;
+  font-weight: 800;
+}
+
+.result-stat-label {
+  font-size: 0.82rem;
+  opacity: 0.9;
+  margin-top: 2px;
+}
+
+.result-actions {
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+  flex-wrap: wrap;
+  margin-top: 18px;
+  padding-top: 18px;
+  border-top: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.btn-result-action {
+  background: #ffffff;
+  color: var(--tdc-navy);
+  border: none;
+  padding: 8px 18px;
+  border-radius: var(--radius-sm);
+  font-size: 0.88rem;
+  font-weight: 700;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  transition: all 0.2s;
+}
+
+.btn-result-action:hover {
+  background: #f1f5f9;
+  transform: translateY(-1px);
+}
+
+.btn-retake {
+  background: var(--tdc-amber);
+  color: #0f172a;
+}
+
+.btn-retake:hover {
+  background: var(--tdc-amber-hover);
+}
+
+/* ================= FILTER BAR (AFTER SUBMIT) ================= */
+.review-filter-bar {
+  background: #ffffff;
+  border: 1px solid var(--border-light);
+  border-radius: var(--radius-md);
+  padding: 10px 16px;
+  margin-bottom: 18px;
+  display: none;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 10px;
+  box-shadow: var(--shadow-sm);
+}
+
+.filter-btn-group {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.filter-pill {
+  padding: 5px 14px;
+  border-radius: var(--radius-pill);
+  border: 1px solid var(--border-color);
+  background: #ffffff;
+  color: var(--text-muted);
+  font-size: 0.82rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.filter-pill:hover {
+  background: #f8fafc;
+  color: var(--text-main);
+}
+
+.filter-pill.active {
+  background: var(--tdc-navy);
+  border-color: var(--tdc-navy);
+  color: #ffffff;
+}
+
+/* ================= QUESTIONS LIST ================= */
+.questions-list {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.question-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border-light);
+  border-radius: var(--radius-md);
+  padding: 18px 20px;
+  box-shadow: var(--shadow-sm);
+  transition: box-shadow 0.2s, border-color 0.2s;
+}
+
+.question-card:hover {
+  box-shadow: var(--shadow-md);
+}
+
+.question-card.correct-card {
+  border-left: 5px solid var(--success);
+  background-color: #fbfffd;
+}
+
+.question-card.incorrect-card {
+  border-left: 5px solid var(--danger);
+  background-color: #fffcfc;
+}
+
+.question-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 12px;
+}
+
+.question-num-badge {
+  font-size: 0.9rem;
+  font-weight: 700;
+  color: var(--tdc-navy);
+  background: #eef4fb;
+  padding: 3px 10px;
+  border-radius: 6px;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.question-actions-right {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.btn-flag {
+  background: transparent;
+  border: 1px solid var(--border-color);
+  color: var(--text-muted);
+  border-radius: 6px;
+  padding: 3px 8px;
+  font-size: 0.76rem;
+  font-weight: 600;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  transition: all 0.2s;
+}
+
+.btn-flag:hover, .btn-flag.active {
+  background: var(--warning-bg);
+  border-color: var(--warning);
+  color: #b45309;
+}
+
+.question-status-tag {
+  font-size: 0.78rem;
+  font-weight: 700;
+  padding: 3px 8px;
+  border-radius: 20px;
+  display: none;
+}
+
+.question-status-tag.correct {
+  display: inline-block;
+  background: var(--success-bg);
+  color: #065f46;
+  border: 1px solid var(--success-border);
+}
+
+.question-status-tag.incorrect {
+  display: inline-block;
+  background: var(--danger-bg);
+  color: #991b1b;
+  border: 1px solid var(--danger-border);
+}
+
+/* Question Cue Prompt Text */
+.question-prompt {
+  font-size: 1.05rem;
+  font-weight: 600;
+  color: #0f172a;
+  background: #f8fafc;
+  padding: 12px 16px;
+  border-radius: var(--radius-sm);
+  border: 1px solid #edf2f7;
+  white-space: pre-line;
+  margin-bottom: 14px;
+  line-height: 1.55;
+}
+
+/* Options Stack */
+.options-group {
+  display: flex;
+  flex-direction: column;
+  gap: 9px;
+}
+
+.option-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 11px 14px;
+  border: 1.5px solid var(--border-light);
+  border-radius: var(--radius-sm);
+  background: #ffffff;
+  cursor: pointer;
+  transition: all 0.2s;
+  user-select: none;
+  position: relative;
+}
+
+.option-item:hover {
+  background: #f8fafc;
+  border-color: #cbd5e1;
+}
+
+.option-item.selected {
+  border-color: var(--tdc-navy);
+  background: #f0f7ff;
+}
+
+.option-radio {
+  display: none;
+}
+
+.option-key {
+  width: 26px;
+  height: 26px;
+  border-radius: 50%;
+  border: 1.5px solid #94a3b8;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  font-size: 0.82rem;
+  color: #475569;
+  flex-shrink: 0;
+  transition: all 0.2s;
+}
+
+.option-item.selected .option-key {
+  border-color: var(--tdc-navy);
+  background: var(--tdc-navy);
+  color: #ffffff;
+}
+
+.option-text {
+  font-size: 0.95rem;
+  color: #1e293b;
+  flex: 1;
+}
+
+/* Review States for Options */
+.option-item.option-correct {
+  border-color: var(--success) !important;
+  background: var(--success-bg) !important;
+  color: #065f46;
+  font-weight: 600;
+}
+
+.option-item.option-correct .option-key {
+  background: var(--success) !important;
+  border-color: var(--success) !important;
+  color: #ffffff !important;
+}
+
+.option-item.option-wrong-choice {
+  border-color: var(--danger) !important;
+  background: var(--danger-bg) !important;
+  color: #991b1b;
+  text-decoration: line-through;
+}
+
+.option-item.option-wrong-choice .option-key {
+  background: var(--danger) !important;
+  border-color: var(--danger) !important;
+  color: #ffffff !important;
+}
+
+/* Solution Explanation & Translation Box (STRICTLY HIDDEN BEFORE SUBMISSION) */
+.solution-box {
+  margin-top: 16px;
+  padding-top: 14px;
+  border-top: 1px dashed var(--border-light);
+  display: none;
+  animation: fadeIn 0.3s ease-in;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+.explanation-section {
+  background: #f0fdf4;
+  border: 1px solid #bbf7d0;
+  border-radius: var(--radius-sm);
+  padding: 12px 15px;
+  margin-bottom: 10px;
+}
+
+.section-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 0.8rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  color: #15803d;
+  margin-bottom: 6px;
+  letter-spacing: 0.5px;
+}
+
+.explanation-text {
+  font-size: 0.9rem;
+  color: #14532d;
+  line-height: 1.55;
+  white-space: pre-line;
+}
+
+.translation-section {
+  background: #f8fafc;
+  border: 1px solid #e2e8f0;
+  border-radius: var(--radius-sm);
+  padding: 12px 15px;
+}
+
+.translation-section .section-badge {
+  color: var(--tdc-navy);
+}
+
+.translation-text {
+  font-size: 0.9rem;
+  color: #334155;
+  line-height: 1.55;
+  white-space: pre-line;
+}
+
+/* ================= RIGHT SIDEBAR ================= */
+.sidebar-sticky {
+  position: sticky;
+  top: 75px;
+  background: var(--bg-card);
+  border: 1px solid var(--border-light);
+  border-radius: var(--radius-md);
+  padding: 18px;
+  box-shadow: var(--shadow-sm);
+}
+
+.sidebar-title {
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: var(--tdc-navy);
+  margin-bottom: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.progress-info {
+  margin-bottom: 14px;
+}
+
+.progress-text {
+  font-size: 0.8rem;
+  color: var(--text-muted);
+  margin-bottom: 6px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.progress-bar-bg {
+  width: 100%;
+  height: 6px;
+  background-color: #e2e8f0;
+  border-radius: 3px;
+  overflow: hidden;
+}
+
+.progress-bar-fill {
+  height: 100%;
+  background: linear-gradient(90deg, var(--tdc-navy) 0%, var(--tdc-amber) 100%);
+  width: 0%;
+  transition: width 0.3s ease;
+}
+
+.palette-legend {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.72rem;
+  color: var(--text-muted);
+  margin-bottom: 12px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid var(--border-light);
+}
+
+.legend-item {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.legend-dot {
+  width: 11px;
+  height: 11px;
+  border-radius: 3px;
+  border: 1px solid var(--border-light);
+}
+
+.legend-dot.answered { background: var(--tdc-navy); border-color: var(--tdc-navy); }
+.legend-dot.unanswered { background: #f8fafc; }
+.legend-dot.flagged { background: var(--tdc-amber); border-color: var(--tdc-amber); }
+.legend-dot.correct { background: var(--success); border-color: var(--success); }
+.legend-dot.incorrect { background: var(--danger); border-color: var(--danger); }
+
+/* The 40 Grid Buttons */
+.questions-grid {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 7px;
+  max-height: 360px;
+  overflow-y: auto;
+  padding-right: 3px;
+}
+
+.grid-btn {
+  aspect-ratio: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.83rem;
+  font-weight: 700;
+  border: 1.5px solid var(--border-light);
+  background: #f8fafc;
+  border-radius: 6px;
+  color: #475569;
+  cursor: pointer;
+  transition: all 0.2s;
+  position: relative;
+}
+
+.grid-btn:hover {
+  background: #e2e8f0;
+  border-color: #94a3b8;
+}
+
+.grid-btn.answered {
+  background: var(--tdc-navy);
+  color: #ffffff;
+  border-color: var(--tdc-navy);
+}
+
+.grid-btn.flagged::after {
+  content: "★";
+  position: absolute;
+  top: 1px;
+  right: 2px;
+  font-size: 0.62rem;
+  color: var(--tdc-amber);
+}
+
+.grid-btn.answered.flagged::after {
+  color: var(--tdc-yellow);
+}
+
+.grid-btn.grid-correct {
+  background: var(--success) !important;
+  color: #ffffff !important;
+  border-color: var(--success) !important;
+}
+
+.grid-btn.grid-incorrect {
+  background: var(--danger) !important;
+  color: #ffffff !important;
+  border-color: var(--danger) !important;
+}
+
+.sidebar-submit-btn {
+  width: 100%;
+  margin-top: 14px;
+  background: var(--tdc-amber);
+  color: #0f172a;
+  border: none;
+  padding: 11px;
+  border-radius: var(--radius-sm);
+  font-size: 0.98rem;
+  font-weight: 800;
+  cursor: pointer;
+  box-shadow: 0 4px 10px rgba(245, 158, 11, 0.3);
+  transition: all 0.2s;
+}
+
+.sidebar-submit-btn:hover {
+  background: var(--tdc-amber-hover);
+  transform: translateY(-2px);
+}
+
+/* ================= MODALS ================= */
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(15, 23, 42, 0.6);
+  backdrop-filter: blur(4px);
+  display: none;
+  align-items: center;
+  justify-content: center;
+  z-index: 2000;
+  padding: 16px;
+}
+
+.modal-overlay.open {
+  display: flex;
+  animation: fadeIn 0.2s ease-out;
+}
+
+.modal-box {
+  background: #ffffff;
+  border-radius: var(--radius-lg);
+  max-width: 520px;
+  width: 100%;
+  padding: 24px;
+  box-shadow: var(--shadow-lg);
+  position: relative;
+  animation: slideUp 0.3s ease-out;
+}
+
+@keyframes slideUp {
+  from { opacity: 0; transform: translateY(15px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.modal-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 14px;
+}
+
+.modal-title {
+  font-size: 1.2rem;
+  font-weight: 800;
+  color: var(--tdc-navy);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.modal-close-btn {
+  background: none;
+  border: none;
+  font-size: 1.35rem;
+  color: var(--text-muted);
+  cursor: pointer;
+}
+
+.modal-body {
+  font-size: 0.92rem;
+  color: #334155;
+  margin-bottom: 20px;
+  line-height: 1.55;
+}
+
+.form-group {
+  margin-bottom: 12px;
+}
+
+.form-group label {
+  display: block;
+  font-size: 0.83rem;
+  font-weight: 700;
+  margin-bottom: 4px;
+  color: var(--tdc-navy);
+}
+
+.form-group input {
+  width: 100%;
+  padding: 9px 12px;
+  border: 1.5px solid var(--border-color);
+  border-radius: var(--radius-sm);
+  font-size: 0.92rem;
+  transition: border-color 0.2s;
+}
+
+.form-group input:focus {
+  outline: none;
+  border-color: var(--tdc-navy);
+  box-shadow: 0 0 0 3px rgba(0, 51, 102, 0.15);
+}
+
+.modal-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+}
+
+.btn-secondary {
+  background: #e2e8f0;
+  color: #334155;
+  border: none;
+  padding: 8px 16px;
+  border-radius: var(--radius-sm);
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.btn-primary {
+  background: var(--tdc-navy);
+  color: #ffffff;
+  border: none;
+  padding: 8px 18px;
+  border-radius: var(--radius-sm);
+  font-weight: 700;
+  cursor: pointer;
+}
+
+/* ================= FOOTER ================= */
+.app-footer {
+  background: #ffffff;
+  border-top: 1px solid var(--border-light);
+  padding: 20px 16px;
+  margin-top: 35px;
+  text-align: center;
+  font-size: 0.83rem;
+  color: var(--text-muted);
+}
+
+.footer-content {
+  max-width: 1400px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  align-items: center;
+}
+
+.footer-school {
+  font-weight: 700;
+  color: var(--tdc-navy);
+}
+
+/* ================= PRINT STYLES ================= */
+@media print {
+  .header-wrapper,
+  .sidebar-sticky,
+  .btn-flag,
+  .sidebar-submit-btn,
+  .review-filter-bar,
+  .result-actions,
+  .app-footer {
+    display: none !important;
+  }
+
+  .main-layout {
+    grid-template-columns: 1fr;
+    margin: 0;
+    padding: 0;
+  }
+
+  .question-card {
+    break-inside: avoid;
+    box-shadow: none !important;
+    border: 1px solid #ccc !important;
+    margin-bottom: 12px;
+  }
+
+  .results-summary-card {
+    background: #002b55 !important;
+    color: #fff !important;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+}
+
+/* ================= RESPONSIVE ================= */
+@media (max-width: 992px) {
+  .main-layout {
+    grid-template-columns: 1fr;
+  }
+
+  .sidebar-sticky {
+    position: static;
+    margin-bottom: 18px;
+  }
+
+  .questions-grid {
+    grid-template-columns: repeat(8, 1fr);
+    max-height: 220px;
+  }
+}
+
+@media (max-width: 680px) {
+  .brand-main-title {
+    font-size: 1.05rem;
+  }
+  .status-pill-group, .visitor-pill {
+    padding: 5px 10px;
+    font-size: 0.8rem;
+  }
+  .btn-student-info, .btn-stats {
+    padding: 5px 12px;
+    font-size: 0.8rem;
+  }
+}
+  </style>
 </head>
 <body>
 
-  <!-- ================= TOP HEADER ================= -->
+  <!-- ================= TOP HEADER (MATCHES USER REFERENCE SCREENSHOT) ================= -->
   <header class="header-wrapper">
     <div class="header-container">
-      <!-- Left: TDC Logo & ONLY "TA2 - SENTENCE BUILDING" -->
+      
+      <!-- Left: TDC Logo White Box + Title + TA2 Badge -->
       <div class="brand-section">
         <div class="logo-white-card">
-          <img src="logo-tdc.png" alt="TDC Logo" class="tdc-logo-img">
+          <img src="logo-tdc.png" alt="Trường Cao Đẳng Công Nghệ Thủ Đức" class="tdc-logo-img" onerror="this.src='https://media.tdc.edu.vn/Media/1_TH1082/FolderFunc/202509/Images/tdc-20250922080814-e.png'">
         </div>
         <div class="brand-title-wrap">
-          <span class="brand-main-title">TA2 - SENTENCE BUILDING</span>
+          <span class="brand-main-title">English 2 - SENTENCE BUILDING</span>
+          <span class="badge-ta2">TA2</span>
         </div>
       </div>
 
-      <!-- Right: Timer, Counter, Student & Admin controls -->
+      <!-- Right Controls: Time & Progress, Visitor Count, Student Info, Statistics -->
       <div class="header-controls">
-        <!-- Status Pill: Timer & Progress -->
+        
+        <!-- Time & Progress Pill -->
         <div class="status-pill-group">
-          <div class="status-pill-item" title="Thời gian làm bài">
-            <span>⏱️</span>
-            <span class="timer-digits" id="timerDisplay">00:00</span>
+          <div class="status-pill-item">
+            <span>🕒</span>
+            <span>Thời gian:</span>
+            <span id="timerDisplay" class="timer-digits">00:00</span>
           </div>
           <div class="status-divider"></div>
-          <div class="status-pill-item" title="Tiến độ trả lời">
-            <span>📝</span>
-            <span class="highlight-val" id="headerProgress">0/40</span>
+          <div class="status-pill-item">
+            <span style="color: #4ade80;">✔</span>
+            <span>Đã làm:</span>
+            <span id="headerProgress" class="highlight-val">0/40</span>
           </div>
         </div>
 
-        <!-- Visitor Counter Pill (Live Count) -->
-        <div class="visitor-pill" id="visitorPill" onclick="openTeacherModal()" title="Số lượt sinh viên truy cập (Nhấn để xem quản lý)">
+        <!-- Visitor Counter Pill -->
+        <div class="visitor-pill" onclick="openTeacherModal()" title="Bấm vào để xem thống kê lượt truy cập chi tiết">
           <span class="live-green-dot"></span>
-          <span>Truy cập:</span>
-          <strong class="highlight-val" id="visitorCount">1</strong>
+          <span>👥</span>
+          <span>Lượt truy cập:</span>
+          <strong id="visitorCount" class="highlight-val">1</strong>
         </div>
 
-        <!-- Student Info Button -->
-        <button type="button" class="btn-student-info" id="btnStudentInfo" onclick="openStudentModal()">
+        <!-- Yellow Button: Nhập Họ tên & MSSV -->
+        <button type="button" class="btn-student-info" id="btnStudentInfo" onclick="openStudentModal()" title="Cập nhật thông tin sinh viên dự thi">
           <span>📝</span>
           <span>Nhập Họ tên & MSSV</span>
         </button>
 
-        <!-- Teacher / Admin Center Button -->
-        <button type="button" class="btn-admin-panel" id="btnAdminPanel" onclick="openTeacherModal()" title="Bảng điều khiển Giảng viên">
-          <span>⚙️</span>
-          <span>Giảng viên</span>
+        <!-- Translucent Button: Thống kê -->
+        <button type="button" class="btn-stats" onclick="openTeacherModal()" title="Thống kê bài thi dành cho Giảng viên & Quản trị">
+          <span>📊</span>
+          <span>Thống kê</span>
         </button>
+
       </div>
     </div>
   </header>
 
-  <!-- ================= OVERLAY: EXAM LOCKED BY TEACHER ================= -->
-  <div class="exam-locked-overlay" id="examLockedOverlay">
-    <div class="locked-card">
-      <div style="font-size: 3rem;">🔒</div>
-      <h2>PHÒNG THI ĐANG TẠM KHÓA</h2>
-      <p>
-        Phòng thi trắc nghiệm <strong>TA2 - SENTENCE BUILDING</strong> hiện đang được tạm khóa bởi Giảng viên phụ trách.
-        Vui lòng liên hệ Thầy/Cô để được mở lại thời gian làm bài.
-      </p>
-      <button type="button" class="btn-modal-save" onclick="openTeacherModal()" style="background: #b91c1c;">
-        Mở khóa (Dành cho Giảng viên)
-      </button>
-    </div>
-  </div>
-
-  <!-- ================= OVERLAY: ROOM PASSCODE REQUIRED ================= -->
-  <div class="passcode-overlay" id="passcodeOverlay">
-    <div class="passcode-card">
-      <div style="font-size: 2.8rem; color: var(--tdc-navy);">🔑</div>
-      <h3>YÊU CẦU MÃ PHÒNG THI</h3>
-      <p>Giảng viên đã bật chế độ bảo vệ. Vui lòng nhập mã phòng thi do Giảng viên cung cấp trên lớp để vào làm bài:</p>
-      <input type="text" id="inputPasscode" class="passcode-input" placeholder="NHẬP MÃ TẠI ĐÂY" autocomplete="off" onkeydown="if(event.key==='Enter') verifyPasscode()">
-      <div id="passcodeError" style="color: #ef4444; font-size: 0.88rem; font-weight: 700; margin-bottom: 14px; display: none;"></div>
-      <div>
-        <button type="button" class="btn-modal-save" style="width: 100%; padding: 12px; font-size: 1rem;" onclick="verifyPasscode()">
-          XÁC NHẬN VÀO THI
-        </button>
-      </div>
-      <div style="margin-top: 15px; font-size: 0.8rem; color: #94a3b8;">
-        (Dành cho Giảng viên: Bấm <a href="javascript:void(0)" onclick="openTeacherModal()" style="color: var(--tdc-navy); font-weight: 700;">vào đây</a> để quản lý mã)
-      </div>
-    </div>
-  </div>
-
-  <!-- ================= MAIN CONTENT ================= -->
+  <!-- ================= MAIN LAYOUT ================= -->
   <main class="main-layout">
-    <!-- Left Column: Meta, Results & Questions -->
-    <div class="left-content-area">
-
-      <!-- Exam Meta Card -->
+    
+    <!-- LEFT CONTENT: Questions & Results -->
+    <div class="content-left">
+      
+      <!-- Student Profile & Meta Information -->
       <div class="exam-meta-card">
         <div class="exam-meta-left">
-          <div class="exam-subject-name">BÀI KIỂM TRA TRẮC NGHIỆM: TA2 - SENTENCE BUILDING</div>
-          <div class="exam-meta-sub">
-            Gồm 40 câu trắc nghiệm xây dựng câu hoàn chỉnh • Hoàn thành tất cả các câu và nộp bài để xem đáp án có lời giải thích chi tiết & dịch nghĩa
-          </div>
+          <div class="exam-subject-name">Bài kiểm tra trắc nghiệm TA2 - Sentence Building</div>
+          <div class="exam-meta-sub">Đề thi gồm 40 câu hỏi xây dựng câu hoàn chỉnh.</div>
         </div>
+
         <div class="student-info-tags">
-          <div class="student-tag">Họ tên: <strong id="studentNameDisplay">Chưa nhập</strong></div>
-          <div class="student-tag">MSSV: <strong id="studentIdDisplay">Chưa nhập</strong></div>
-          <div class="student-tag">Lớp: <strong id="studentClassDisplay">Chưa nhập</strong></div>
+          <div class="student-tag">
+            <span>👤 SV:</span>
+            <strong id="studentNameDisplay">Chưa nhập</strong>
+          </div>
+          <div class="student-tag">
+            <span>🆔 MSSV:</span>
+            <strong id="studentIdDisplay">Chưa nhập</strong>
+          </div>
+          <div class="student-tag">
+            <span>🏫 Lớp:</span>
+            <strong id="studentClassDisplay">Chưa nhập</strong>
+          </div>
         </div>
       </div>
 
-      <!-- Results Summary Card (STRICTLY SHOWN ONLY AFTER SUBMIT) -->
-      <section class="results-summary-card" id="resultsSummaryCard">
+      <!-- RESULTS SUMMARY CARD (Revealed ONLY after submission) -->
+      <section class="results-summary-card" id="resultsSummaryCard" style="display: none;">
+        <h2 style="font-size: 1.5rem; margin-bottom: 20px; font-weight: 800; text-align: center;">
+          🏆 KẾT QUẢ BÀI THI: TA2 - SENTENCE BUILDING
+        </h2>
+
         <div class="results-grid">
-          <!-- Score Circle -->
+          <!-- Total Score -->
           <div class="score-circle-container">
             <div class="score-display" id="scoreRaw">0/40</div>
-            <div class="score-scale-10" id="scoreScale10">0.0 / 10</div>
-            <div style="font-size: 0.85rem; opacity: 0.85; margin-top: 4px;">Điểm quy đổi hệ 10</div>
+            <div class="score-scale-10" id="scoreScale10">Điểm: 0.0 / 10</div>
           </div>
 
-          <!-- Stats 1: Percentage -->
+          <!-- Percentage -->
           <div class="result-stat-box">
-            <div class="result-stat-value" id="scorePercentage" style="color: #67e8f9;">0%</div>
+            <div class="result-stat-value" id="scorePercentage">0%</div>
             <div class="result-stat-label">Tỷ lệ chính xác</div>
           </div>
 
-          <!-- Stats 2: Correct / Wrong -->
+          <!-- Time Taken -->
           <div class="result-stat-box">
-            <div class="result-stat-value" style="color: #4ade80;">
-              <span id="correctCount">0</span> <span style="font-size: 0.9rem; color: #f87171;">/ <span id="wrongCount">0</span> sai</span>
-            </div>
-            <div class="result-stat-label">Số câu Đúng / Sai</div>
+            <div class="result-stat-value" id="timeTaken" style="font-size: 1.35rem;">0 phút</div>
+            <div class="result-stat-label">Thời gian làm bài</div>
           </div>
 
-          <!-- Stats 3: Time Taken -->
+          <!-- Detail Count -->
           <div class="result-stat-box">
-            <div class="result-stat-value" id="timeTaken" style="color: #fde047;">0m 00s</div>
-            <div class="result-stat-label">Thời gian hoàn thành</div>
+            <div class="result-stat-value" style="color: #4ade80;" id="correctCount">0 câu</div>
+            <div class="result-stat-label">Số câu ĐÚNG (✓)</div>
           </div>
 
-          <!-- Stats 4: Rating -->
           <div class="result-stat-box">
-            <div class="result-stat-value" id="scoreRating" style="font-size: 1.25rem;">Đạt</div>
-            <div class="result-stat-label">Đánh giá năng lực</div>
+            <div class="result-stat-value" style="color: #f87171;" id="wrongCount">0 câu</div>
+            <div class="result-stat-label">Số câu SAI (✗)</div>
           </div>
         </div>
 
-        <!-- Post-submit Actions -->
+        <div style="text-align: center; margin-top: 15px; font-size: 1.15rem; font-weight: 700;">
+          Xếp loại: <span id="scoreRating" style="color: var(--tdc-yellow);">...</span>
+        </div>
+
+        <!-- Result Action Buttons -->
         <div class="result-actions">
-          <button type="button" class="btn-result-action btn-retake" onclick="retakeQuiz()">
-            <span>🔄</span> <span>Làm lại bài thi</span>
-          </button>
           <button type="button" class="btn-result-action" onclick="printResults()">
-            <span>🖨️</span> <span>In / Lưu PDF bảng điểm</span>
+            🖨️ In / Lưu PDF bảng điểm
           </button>
           <button type="button" class="btn-result-action" onclick="exportResultsCSV()">
-            <span>📥</span> <span>Xuất file Excel (CSV)</span>
+            📥 Xuất bảng điểm CSV (Excel)
+          </button>
+          <button type="button" class="btn-result-action btn-retake" onclick="retakeQuiz()">
+            🔄 Làm lại bài thi
           </button>
         </div>
       </section>
 
-      <!-- Review Filter Bar (STRICTLY SHOWN ONLY AFTER SUBMIT) -->
-      <div class="review-filter-bar" id="reviewFilterBar">
-        <div style="font-size: 0.9rem; font-weight: 700; color: var(--tdc-navy);">
-          🔍 Xem lại bài làm:
-        </div>
+      <!-- REVIEW FILTER BAR (Revealed ONLY after submission) -->
+      <div class="review-filter-bar" id="reviewFilterBar" style="display: none;">
+        <span style="font-size: 0.9rem; font-weight: 700; color: var(--tdc-navy);">
+          🔍 Lọc câu hỏi xem lại:
+        </span>
         <div class="filter-btn-group">
           <button type="button" class="filter-pill active" id="filter_all" onclick="filterQuestions('all')">
-            Tất cả (40)
+            Tất cả 40 câu
           </button>
           <button type="button" class="filter-pill" id="filter_correct" onclick="filterQuestions('correct')">
-            Câu đúng ✓
+            Chỉ câu ĐÚNG (✓)
           </button>
           <button type="button" class="filter-pill" id="filter_incorrect" onclick="filterQuestions('incorrect')">
-            Câu sai ✗
-          </button>
-          <button type="button" class="filter-pill" id="filter_flagged" onclick="filterQuestions('flagged')">
-            Đã đánh dấu ★
+            Chỉ câu SAI (✗)
           </button>
         </div>
       </div>
 
-      <!-- Questions List Container -->
+      <!-- QUESTIONS CONTAINER (Rendered dynamically) -->
       <div class="questions-list" id="questionsContainer">
-        <!-- Rendered dynamically by app.js -->
+        <!-- Injected via JavaScript -->
       </div>
+
     </div>
 
-    <!-- Right Column: Sticky Navigation Sidebar -->
-    <aside class="sidebar-sticky">
-      <div class="sidebar-title">
-        <span>BẢNG ĐIỀU HƯỚNG CÂU HỎI</span>
-        <span style="font-size: 0.88rem; color: var(--tdc-amber); font-weight: 800;" id="progressText">0/40</span>
-      </div>
+    <!-- RIGHT SIDEBAR: QUESTION PALETTE -->
+    <aside class="sidebar-right">
+      <div class="sidebar-sticky">
+        <div class="sidebar-title">
+          <span>Bảng điều hướng câu hỏi</span>
+          <span style="font-size: 0.8rem; color: var(--text-muted); font-weight: normal;">40 câu</span>
+        </div>
 
-      <!-- Progress Bar -->
-      <div class="progress-bar-container">
-        <div class="progress-bar-fill" id="progressBarFill"></div>
-      </div>
+        <div class="progress-info">
+          <div class="progress-text">
+            <span id="progressText">Đã làm: 0 / 40 câu (0%)</span>
+          </div>
+          <div class="progress-bar-bg">
+            <div class="progress-bar-fill" id="progressBarFill"></div>
+          </div>
+        </div>
 
-      <!-- 40 Questions Grid -->
-      <div class="questions-grid" id="questionsGrid">
-        <!-- 40 buttons rendered dynamically by app.js -->
-      </div>
+        <div class="palette-legend">
+          <div class="legend-item">
+            <div class="legend-dot unanswered"></div>
+            <span>Chưa làm</span>
+          </div>
+          <div class="legend-item">
+            <div class="legend-dot answered"></div>
+            <span>Đã chọn</span>
+          </div>
+          <div class="legend-item">
+            <div class="legend-dot flagged"></div>
+            <span>Đánh dấu ★</span>
+          </div>
+        </div>
 
-      <!-- Main Submit Button -->
-      <button type="button" class="btn-submit-main" id="btnSidebarSubmit" onclick="requestSubmitQuiz()">
-        <span>📤</span>
-        <span>NỘP BÀI THI</span>
-      </button>
+        <!-- 40 Grid Buttons -->
+        <div class="questions-grid" id="questionsGrid">
+          <!-- Injected via JavaScript -->
+        </div>
 
-      <!-- Legend -->
-      <div class="sidebar-legend">
-        <div class="legend-item">
-          <div class="legend-swatch answered"></div>
-          <span>Đã chọn đáp án</span>
-        </div>
-        <div class="legend-item">
-          <div class="legend-swatch"></div>
-          <span>Chưa trả lời</span>
-        </div>
-        <div class="legend-item">
-          <div class="legend-swatch flagged"></div>
-          <span>Đã đánh dấu xem lại</span>
-        </div>
-        <div class="legend-item" style="margin-top: 4px;">
-          <div class="legend-swatch correct"></div>
-          <span>Đúng (Sau khi nộp)</span>
-        </div>
-        <div class="legend-item">
-          <div class="legend-swatch incorrect"></div>
-          <span>Sai (Sau khi nộp)</span>
-        </div>
+        <!-- Big Submit Button in Sidebar -->
+        <button type="button" class="sidebar-submit-btn" id="btnSidebarSubmit" onclick="promptSubmit()">
+          NỘP BÀI THI
+        </button>
       </div>
     </aside>
+
   </main>
+
+  <!-- ================= FOOTER ================= -->
+  <footer class="app-footer">
+    <div class="footer-content">
+      <div class="footer-school">TRƯỜNG CAO ĐẲNG CÔNG NGHỆ THỦ ĐỨC (TDC)</div>
+      <div>Học phần: <strong>TA2 - SENTENCE BUILDING</strong> | Hệ thống trắc nghiệm và ôn luyện trực tuyến</div>
+      <div style="margin-top: 5px;">
+        <button type="button" onclick="openTeacherModal()" style="background: none; border: none; color: var(--tdc-navy-light); text-decoration: underline; cursor: pointer; font-size: 0.82rem;">
+          📊 Quản trị viên & Giảng viên: Xem số liệu truy cập & Hướng dẫn
+        </button>
+      </div>
+    </div>
+  </footer>
 
   <!-- ================= MODAL: STUDENT INFO ================= -->
   <div class="modal-overlay" id="studentModal">
     <div class="modal-box">
       <div class="modal-header">
-        <div class="modal-title">📝 Thông tin sinh viên làm bài</div>
-        <button type="button" class="btn-close-modal" onclick="closeStudentModal()">&times;</button>
+        <div class="modal-title">
+          <span>📝 Thông tin sinh viên</span>
+        </div>
+        <button type="button" class="modal-close-btn" onclick="closeStudentModal()">&times;</button>
       </div>
-      <form onsubmit="saveStudentInfo(event)">
-        <div class="form-group">
-          <label class="form-label" for="inputStudentName">Họ và tên sinh viên: <span style="color:#ef4444;">*</span></label>
-          <input type="text" id="inputStudentName" class="form-input" placeholder="Ví dụ: Nguyễn Văn A" required>
-        </div>
-        <div class="form-group">
-          <label class="form-label" for="inputStudentId">Mã số sinh viên (MSSV): <span style="color:#ef4444;">*</span></label>
-          <input type="text" id="inputStudentId" class="form-input" placeholder="Ví dụ: 23CD0123" required>
-        </div>
-        <div class="form-group">
-          <label class="form-label" for="inputStudentClass">Lớp học phần:</label>
-          <input type="text" id="inputStudentClass" class="form-input" placeholder="Ví dụ: TA2_N01">
-        </div>
-        <div class="modal-actions">
-          <button type="button" class="btn-modal-cancel" onclick="closeStudentModal()">Đóng</button>
-          <button type="submit" class="btn-modal-save">Lưu thông tin</button>
-        </div>
-      </form>
-    </div>
-  </div>
-
-  <!-- ================= MODAL: INCOMPLETE QUESTIONS WARNING ================= -->
-  <div class="modal-overlay" id="incompleteModal">
-    <div class="modal-box">
-      <div class="modal-header">
-        <div class="modal-title" style="color: #b91c1c;">⚠️ BÀI THI CHƯA HOÀN TẤT</div>
-        <button type="button" class="btn-close-modal" onclick="closeIncompleteModal()">&times;</button>
-      </div>
-      <div>
-        <p style="color: #334155; font-size: 0.95rem; margin-bottom: 12px; line-height: 1.55;">
-          Bạn còn <strong style="color: #ef4444;" id="unansweredCountDisplay">0</strong> câu hỏi chưa chọn đáp án.
+      <div class="modal-body">
+        <p style="margin-bottom: 15px; color: #64748b; font-size: 0.9rem;">
+          Vui lòng nhập thông tin để hệ thống ghi nhận vào bảng điểm và xuất kết quả chính xác.
         </p>
-        <p style="color: #64748b; font-size: 0.88rem; margin-bottom: 14px;">
-          Theo quy định, bạn cần hoàn thành đủ <strong>40/40 câu</strong> trước khi nộp bài để được mở khóa đáp án, lời giải thích chi tiết và dịch nghĩa:
-        </p>
-        <div style="max-height: 140px; overflow-y: auto; background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 6px; padding: 10px; display: flex; flex-wrap: wrap; gap: 6px;" id="unansweredQuestionsList">
-          <!-- Missing buttons -->
-        </div>
-      </div>
-      <div class="modal-actions" style="margin-top: 18px;">
-        <button type="button" class="btn-modal-save" style="background: var(--tdc-amber); color: #0f172a;" onclick="closeIncompleteModal()">
-          Tiếp tục làm bài
-        </button>
+        <form onsubmit="saveStudentInfo(event)">
+          <div class="form-group">
+            <label for="inputStudentName">Họ và tên sinh viên *</label>
+            <input type="text" id="inputStudentName" placeholder="Ví dụ: Nguyễn Văn An" required>
+          </div>
+          <div class="form-group">
+            <label for="inputStudentId">Mã số sinh viên (MSSV) *</label>
+            <input type="text" id="inputStudentId" placeholder="Ví dụ: 22CDTH01" required>
+          </div>
+          <div class="form-group">
+            <label for="inputStudentClass">Lớp học phần *</label>
+            <input type="text" id="inputStudentClass" placeholder="Ví dụ: CDTH22A" required>
+          </div>
+          <div class="modal-actions" style="margin-top: 20px;">
+            <button type="button" class="btn-secondary" onclick="closeStudentModal()">Bỏ qua</button>
+            <button type="submit" class="btn-primary">Lưu thông tin</button>
+          </div>
+        </form>
       </div>
     </div>
   </div>
@@ -298,119 +1371,1182 @@
   <div class="modal-overlay" id="submitConfirmModal">
     <div class="modal-box">
       <div class="modal-header">
-        <div class="modal-title">📤 Xác nhận nộp bài thi</div>
-        <button type="button" class="btn-close-modal" onclick="closeSubmitConfirmModal()">&times;</button>
+        <div class="modal-title">
+          <span>Xác nhận nộp bài</span>
+        </div>
+        <button type="button" class="modal-close-btn" onclick="closeSubmitModal()">&times;</button>
       </div>
-      <div>
-        <p style="color: #334155; font-size: 0.95rem; margin-bottom: 10px; line-height: 1.6;">
-          Bạn đã hoàn thành toàn bộ <strong>40/40 câu hỏi</strong>.
-        </p>
-        <p style="color: #15803d; font-size: 0.9rem; font-weight: 600; background: #f0fdf4; border: 1px solid #bbf7d0; padding: 10px 12px; border-radius: 6px;">
-          ✓ Ngay sau khi bấm xác nhận, hệ thống sẽ chấm điểm và mở khóa toàn bộ đáp án đúng kèm lời giải thích chi tiết và bản dịch tiếng Việt cho từng câu.
-        </p>
+      <div class="modal-body" id="submitModalBody">
+        <!-- Injected via JavaScript -->
       </div>
-      <div class="modal-actions" style="margin-top: 18px;">
-        <button type="button" class="btn-modal-cancel" onclick="closeSubmitConfirmModal()">Kiểm tra lại</button>
-        <button type="button" class="btn-modal-save" style="background: #10b981;" onclick="confirmSubmitQuiz()">
-          Đồng ý nộp bài
+      <div class="modal-actions">
+        <button type="button" class="btn-secondary" onclick="closeSubmitModal()">Tiếp tục làm bài</button>
+        <button type="button" class="btn-primary" style="background: var(--tdc-amber); color: #0f172a;" onclick="confirmSubmit()">
+          Xác nhận Nộp bài
         </button>
       </div>
     </div>
   </div>
 
-  <!-- ================= MODAL: TEACHER CONTROL PANEL ================= -->
+  <!-- ================= MODAL: TEACHER & VISITOR STATS ================= -->
   <div class="modal-overlay" id="teacherModal">
-    <div class="modal-box modal-large">
+    <div class="modal-box" style="max-width: 600px;">
       <div class="modal-header">
-        <div class="modal-title">⚙️ BẢNG ĐIỀU KHIỂN & GIÁM SÁT DÀNH CHO GIẢNG VIÊN</div>
-        <button type="button" class="btn-close-modal" onclick="closeTeacherModal()">&times;</button>
+        <div class="modal-title">
+          <span>📊 Dành cho Giảng viên & Quản trị</span>
+        </div>
+        <button type="button" class="modal-close-btn" onclick="closeTeacherModal()">&times;</button>
       </div>
+      <div class="modal-body">
+        
+        <!-- Live Visitor Stat Box -->
+        <div style="background: #eff6ff; border: 1.5px solid #bfdbfe; border-radius: 8px; padding: 15px; margin-bottom: 18px; text-align: center;">
+          <div style="font-size: 0.9rem; color: #1e40af; font-weight: 600;">Tổng số lượt sinh viên đã truy cập link:</div>
+          <div style="font-size: 2.5rem; font-weight: 900; color: #1d4ed8; line-height: 1.2; margin: 6px 0;" id="teacherVisitorTotal">...</div>
+          <div style="font-size: 0.8rem; color: #60a5fa;">Được đếm tự động theo thời gian thực mỗi khi có lượt truy cập mới.</div>
+        </div>
 
-      <div style="max-height: 480px; overflow-y: auto; padding-right: 4px;">
-        <!-- Card 1: Visitor Control -->
-        <div style="background: #f0fdf4; border: 1px solid #bbf7d0; border-radius: 8px; padding: 14px; margin-bottom: 14px;">
-          <h4 style="color: #166534; font-size: 0.98rem; margin-bottom: 6px; display: flex; align-items: center; gap: 6px;">
-            <span>👁️</span> <span>Kiểm soát số lượng sinh viên truy cập</span>
+        <h4 style="font-size: 0.95rem; font-weight: 700; color: var(--tdc-navy); margin-bottom: 8px;">
+          🔗 Link kiểm tra lượt truy cập trực tiếp từ API:
+        </h4>
+        <div style="background: #f1f5f9; padding: 10px; border-radius: 6px; font-family: monospace; font-size: 0.8rem; word-break: break-all; margin-bottom: 16px; border: 1px solid #cbd5e1;">
+          <a href="https://api.counterapi.dev/v1/tdc-ta2-sentence-building/page-visits" target="_blank" style="color: #2563eb; text-decoration: none;">
+            https://api.counterapi.dev/v1/tdc-ta2-sentence-building/page-visits
+          </a>
+        </div>
+
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
+          <h4 style="font-size: 0.95rem; font-weight: 700; color: var(--tdc-navy);">
+            📋 Lịch sử nộp bài gần đây trên trình duyệt này:
           </h4>
-          <p style="font-size: 0.88rem; color: #14532d; line-height: 1.5;">
-            Tổng số lượt truy cập ghi nhận trên hệ thống: 
-            <strong style="font-size: 1.3rem; color: #15803d; margin-left: 5px;" id="teacherVisitorTotal">0</strong> lượt
-          </p>
-          <div style="margin-top: 6px; font-size: 0.8rem; color: #475569;">
-            API Counter trực tiếp: 
-            <a href="https://api.counterapi.dev/v1/tdc-ta2-sentence-building/page-visits" target="_blank" style="color: #0369a1; text-decoration: underline; font-weight: 600;">
-              https://api.counterapi.dev/v1/tdc-ta2-sentence-building/page-visits
-            </a>
-          </div>
+          <button type="button" class="btn-secondary" style="padding: 4px 10px; font-size: 0.8rem;" onclick="exportResultsCSV()">
+            📥 Tải Excel (CSV)
+          </button>
+        </div>
+        <div id="teacherSubmissionsList" style="max-height: 180px; overflow-y: auto; margin-bottom: 15px;">
+          <!-- Injected via JavaScript -->
         </div>
 
-        <!-- Card 2: Access & Security Controls -->
-        <div style="background: #ffffff; border: 1px solid #e2e8f0; border-radius: 8px; padding: 14px; margin-bottom: 14px;">
-          <h4 style="color: var(--tdc-navy); font-size: 0.98rem; margin-bottom: 12px; display: flex; align-items: center; gap: 6px;">
-            <span>🛡️</span> <span>Cài đặt bảo mật & Quyền vào làm bài</span>
-          </h4>
-
-          <div style="display: flex; flex-direction: column; gap: 12px;">
-            <!-- Lock Exam Toggle -->
-            <label style="display: flex; align-items: center; gap: 10px; cursor: pointer; font-size: 0.9rem;">
-              <input type="checkbox" id="adminToggleLock" style="width: 18px; height: 18px;">
-              <span><strong>Tạm khóa phòng thi</strong> (Sinh viên không thể truy cập vào làm bài)</span>
-            </label>
-
-            <!-- Require Passcode Toggle -->
-            <label style="display: flex; align-items: center; gap: 10px; cursor: pointer; font-size: 0.9rem;">
-              <input type="checkbox" id="adminTogglePasscode" style="width: 18px; height: 18px;">
-              <span><strong>Bắt buộc nhập Mã phòng thi</strong> (Chỉ sinh viên có mã mới vào làm bài được)</span>
-            </label>
-
-            <!-- Passcode Input -->
-            <div style="display: flex; align-items: center; gap: 10px; padding-left: 28px;">
-              <span style="font-size: 0.85rem; color: #475569;">Mã phòng thi hiện tại:</span>
-              <input type="text" id="adminInputPasscode" class="form-input" style="width: 180px; padding: 6px 10px; font-weight: 700; text-transform: uppercase;" placeholder="VD: TDC2026">
-            </div>
-
-            <!-- Change Admin PIN -->
-            <div style="display: flex; align-items: center; gap: 10px; padding-left: 28px; border-top: 1px dashed #e2e8f0; padding-top: 10px;">
-              <span style="font-size: 0.85rem; color: #475569;">Đổi mã PIN Quản lý mới:</span>
-              <input type="password" id="adminInputNewPin" class="form-input" style="width: 180px; padding: 6px 10px;" placeholder="Bỏ trống nếu giữ cũ">
-            </div>
-          </div>
-
-          <div style="margin-top: 14px; text-align: right;">
-            <button type="button" class="btn-modal-save" onclick="saveAdminSettings()">Lưu cài đặt bảo mật</button>
-          </div>
+        <div style="background: #fffbeb; border: 1px solid #fde68a; border-radius: 6px; padding: 10px 14px; font-size: 0.82rem; color: #92400e;">
+          💡 <strong>Mẹo cho Giảng viên:</strong> Thầy/Cô chỉ cần gửi link GitHub Pages này cho sinh viên làm bài, hệ thống sẽ tự động đếm số lượng truy cập và sinh viên sau khi nộp bài có thể xuất file Excel (CSV) hoặc bấm In để nộp bản PDF lại cho Giảng viên!
         </div>
 
-        <!-- Card 3: Student Submissions Tracking -->
-        <div style="background: #ffffff; border: 1px solid #e2e8f0; border-radius: 8px; padding: 14px;">
-          <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px; flex-wrap: wrap; gap: 8px;">
-            <h4 style="color: var(--tdc-navy); font-size: 0.98rem; display: flex; align-items: center; gap: 6px;">
-              <span>📋</span> <span>Danh sách bài thi đã nộp</span>
-            </h4>
-            <div style="display: flex; gap: 6px;">
-              <button type="button" class="btn-modal-save" style="padding: 5px 12px; font-size: 0.82rem; background: #0284c7;" onclick="exportAllSubmissionsCSV()">
-                Xuất file Excel (CSV)
-              </button>
-              <button type="button" class="btn-modal-cancel" style="padding: 5px 10px; font-size: 0.82rem; color: #b91c1c;" onclick="clearAllSubmissions()">
-                Xóa lịch sử
-              </button>
-            </div>
-          </div>
-
-          <div id="teacherSubmissionsList" style="max-height: 200px; overflow-y: auto;">
-            <!-- Submissions list -->
-          </div>
-        </div>
       </div>
-
-      <div class="modal-actions" style="margin-top: 16px;">
-        <button type="button" class="btn-modal-cancel" onclick="closeTeacherModal()">Đóng cửa sổ</button>
+      <div class="modal-actions">
+        <button type="button" class="btn-primary" onclick="closeTeacherModal()">Đóng cửa sổ</button>
       </div>
     </div>
   </div>
 
-  <!-- Scripts -->
-  <script src="js/questions.js"></script>
-  <script src="js/app.js"></script>
+  <!-- Inline Scripts for 100% self-contained standalone execution on GitHub Pages -->
+  <script>
+/**
+ * DATASET 40 CÂU TRẮC NGHIỆM XÂY DỰNG CÂU
+ * Học phần: TA2 - SENTENCE BUILDING
+ * Trường Cao đẳng Công nghệ Thủ Đức (TDC)
+ */
+
+const questionsData = [
+  {
+    id: 1,
+    prompt: "1- I / always / wake up / early / because / I / go / work / at / 7 a.m.",
+    options: {
+      A: "I always wake up early because I go to work at 7 a.m.",
+      B: "I always wakes up early because I went to work at 7 a.m.",
+      C: "I always wake early because I was going to work at 7 a.m."
+    },
+    correct: "A",
+    explanation: "• Thì Hiện tại đơn (Present Simple) diễn tả thói quen sinh hoạt lặp đi lặp lại hàng ngày (dấu hiệu: 'always', mốc giờ 'at 7 a.m.').\n• Chủ ngữ 'I' đi kèm động từ nguyên mẫu: 'wake up' (không chia 'wakes' như B) và 'go to work' (phải có giới từ 'to', không thể bỏ 'up' như C).\n• Phương án B sai vì chủ ngữ 'I' không chia 'wakes' và thì quá khứ 'went' không phù hợp với thói quen hiện tại.\n• Phương án C sai vì thiếu giới từ 'up' (cụm đúng là 'wake up') và thì quá khứ tiếp diễn 'was going' không hợp lý.",
+    translation: "Tôi luôn thức dậy sớm vì tôi đi làm lúc 7 giờ sáng."
+  },
+  {
+    id: 2,
+    prompt: "2- My sister / buy / new dress / last week / for / cousin’s wedding.",
+    options: {
+      A: "My sister buys a new dress last week for cousin’s wedding.",
+      B: "My sister bought a new dress last week for our cousin’s wedding.",
+      C: "My sister was buying new dress last week for our cousin’s wedding."
+    },
+    correct: "B",
+    explanation: "• Dấu hiệu thời gian 'last week' (tuần trước) cho thấy hành động đã hoàn tất trong quá khứ -> Dùng thì Quá khứ đơn (Past Simple): động từ 'buy' đổi thành dạng bất quy tắc 'bought'.\n• Cụm danh từ hoàn chỉnh: 'a new dress' (cần mạo từ 'a' trước danh từ đếm được số ít) và 'for our cousin’s wedding' (cho đám cưới của người em họ chúng tôi).\n• Phương án A sai vì dùng thì hiện tại đơn 'buys' và thiếu mạo từ/tính từ sở hữu trước 'cousin’s wedding'.\n• Phương án C sai vì dùng thì quá khứ tiếp diễn 'was buying' và thiếu mạo từ 'a' trước 'new dress'.",
+    translation: "Chị/em gái tôi đã mua một chiếc váy mới vào tuần trước cho đám cưới của người em họ chúng tôi."
+  },
+  {
+    id: 3,
+    prompt: "3- When / I / walk / home / yesterday, / it / suddenly / start / rain.",
+    options: {
+      A: "When I walked home yesterday, it suddenly started to rain.",
+      B: "When I walk home yesterday, it suddenly started to rain.",
+      C: "When I was walking home yesterday, it suddenly started to rain."
+    },
+    correct: "C",
+    explanation: "• Cấu trúc kết hợp thì Quá khứ tiếp diễn (Past Continuous) và Quá khứ đơn (Past Simple): Một hành động đang diễn ra trong quá khứ ('was walking home') thì có một hành động khác bất ngờ xen vào ('suddenly started to rain').\n• Cấu trúc: When + S + was/were + V-ing, S + V2/ed.\n• Động từ 'start' đi với động từ nguyên mẫu có 'to': 'started to rain'.\n• Phương án A dùng hai thì quá khứ đơn, không làm nổi bật được sự việc đang diễn ra thì bị ngắt quãng.\n• Phương án B sai vì dùng 'walk' (hiện tại đơn) đi với mốc thời gian quá khứ 'yesterday'.",
+    translation: "Hôm qua khi tôi đang đi bộ về nhà thì trời đột nhiên đổ mưa."
+  },
+  {
+    id: 4,
+    prompt: "4- Look! / The children / play / football / park / at / moment.",
+    options: {
+      A: "Look! The children play football in park at moment.",
+      B: "Look! The children played football in the park at the moment.",
+      C: "Look! The children are playing football in the park at the moment."
+    },
+    correct: "C",
+    explanation: "• Dấu hiệu nhận biết câu cảm thán gây sự chú ý 'Look!' (Hãy nhìn kìa!) và cụm từ 'at the moment' (ngay lúc này) -> Bắt buộc dùng thì Hiện tại tiếp diễn (Present Continuous): S + am/is/are + V-ing.\n• Chủ ngữ 'The children' là danh từ số nhiều (số ít là child) -> Đi với 'are playing'.\n• Cụm giới từ chỉ địa điểm và thời gian: 'in the park at the moment'.\n• Phương án A sai vì chia thì hiện tại đơn 'play' và thiếu mạo từ 'the' trong 'in park', 'at moment'.\n• Phương án B sai vì dùng thì quá khứ đơn 'played' mâu thuẫn trực tiếp với 'Look!' và 'at the moment'.",
+    translation: "Nhìn kìa! Lũ trẻ đang chơi bóng đá trong công viên vào lúc này."
+  },
+  {
+    id: 5,
+    prompt: "5- We / not / usually / go / bed / before / 11 p.m. / weekdays.",
+    options: {
+      A: "We don’t usually go to bed before 11 p.m. on weekdays.",
+      B: "We didn’t usually go to bed before 11 p.m. at weekdays.",
+      C: "We won’t usually go to bed before 11 p.m. in weekdays."
+    },
+    correct: "A",
+    explanation: "• Câu diễn tả thói quen lặp đi lặp lại trong cuộc sống hàng ngày (trạng từ 'usually') -> Dùng thì Hiện tại đơn thể phủ định: S + don’t/doesn’t + V(nguyên mẫu). Chủ ngữ 'We' đi với 'don’t usually go to bed'.\n• Giới từ chỉ thời gian: đi với các ngày trong tuần (weekdays) dùng giới từ 'on' ('on weekdays' = vào các ngày trong tuần từ thứ Hai đến thứ Sáu).\n• Phương án B sai vì dùng thì quá khứ 'didn't' và sai giới từ 'at weekdays'.\n• Phương án C sai vì dùng thì tương lai 'won't' và sai giới từ 'in weekdays'.",
+    translation: "Chúng tôi thường không đi ngủ trước 11 giờ đêm vào các ngày trong tuần."
+  },
+  {
+    id: 6,
+    prompt: "6- My best friend / move / another city / two years ago / a better job.",
+    options: {
+      A: "My best friend moved to another city two years ago for a better job.",
+      B: "My best friend moves from another city two years ago for a better job.",
+      C: "My best friend was moving for another city two years ago with a better job."
+    },
+    correct: "A",
+    explanation: "• Dấu hiệu 'two years ago' (hai năm trước) -> Dùng thì Quá khứ đơn (Past Simple): động từ theo quy tắc thêm -ed: 'moved'.\n• Cụm giới từ chỉ sự chuyển dịch địa điểm: 'move to [somewhere]' (chuyển đến nơi nào).\n• Giới từ chỉ mục đích: 'for a better job' (vì một công việc tốt hơn / để có việc làm tốt hơn).\n• Phương án B sai vì dùng 'moves' (hiện tại đơn) và 'moves from' làm thay đổi hẳn nghĩa.\n• Phương án C sai vì dùng quá khứ tiếp diễn 'was moving' và sai giới từ 'moving for'.",
+    translation: "Bạn thân nhất của tôi đã chuyển đến một thành phố khác cách đây hai năm vì một công việc tốt hơn."
+  },
+  {
+    id: 7,
+    prompt: "7- I / be / really tired / after / work / for / 10 hours / without / break.",
+    options: {
+      A: "I will be really tired after work for 10 hours without break.",
+      B: "I am really tired after work for 10 hours without a break.",
+      C: "I was really tired after working for 10 hours without a break."
+    },
+    correct: "C",
+    explanation: "• Sau giới từ 'after', động từ phải ở dạng danh động từ (Gerund: V-ing) -> 'after working for 10 hours'.\n• Cụm thành ngữ thông dụng: 'without a break' (không có quãng nghỉ ngơi nào, cần mạo từ 'a').\n• Diễn tả trạng thái sau khi đã làm việc liên tục: 'I was really tired after working for 10 hours without a break.'\n• Phương án A & B sai vì dùng 'after work for' (work ở dạng nguyên mẫu sau giới từ after là sai ngữ pháp), thiếu mạo từ 'a' trong 'without break'.",
+    translation: "Tôi đã thực sự kiệt sức sau khi làm việc suốt 10 tiếng đồng hồ mà không hề nghỉ ngơi."
+  },
+  {
+    id: 8,
+    prompt: "8- They / plan / visit / their grandparents / next month / family gathering.",
+    options: {
+      A: "They planned visiting their grandparents next month for a family gathering.",
+      B: "They are going to visit their grandparents next month for a family gathering.",
+      C: "They plan visit their grandparents next month for family gathering."
+    },
+    correct: "B",
+    explanation: "• Dấu hiệu thời gian 'next month' (tháng tới) diễn tả kế hoạch, dự định đã được sắp đặt trong tương lai gần -> Dùng cấu trúc 'be going to + V' ('are going to visit').\n• Cụm danh từ chỉ mục đích: 'for a family gathering' (cho buổi sum họp gia đình).\n• Phương án A sai vì dùng thì quá khứ 'planned' đi với mốc tương lai 'next month', hơn nữa cấu trúc là 'plan to visit' chứ không dùng 'plan visiting'.\n• Phương án C sai vì 'plan visit' thiếu giới từ 'to' và thiếu mạo từ 'a' trước 'family gathering'.",
+    translation: "Họ dự định sẽ đến thăm ông bà vào tháng tới nhân dịp sum họp gia đình."
+  },
+  {
+    id: 9,
+    prompt: "9- If / you / study / hard, / you / pass / the / exam / with / a / high score.",
+    options: {
+      A: "If you study hard, you will pass the exam with a high score.",
+      B: "If you studied hard, you will pass the exam with a high score.",
+      C: "If you study hard, you passed the exam with a high score."
+    },
+    correct: "A",
+    explanation: "• Câu điều kiện loại 1 (First Conditional) diễn tả một điều kiện có thể xảy ra ở hiện tại hoặc tương lai:\n  - Cấu trúc: If + S + V(hiện tại đơn), S + will + V(nguyên mẫu).\n  - Mệnh đề If: 'If you study hard' (study chia ở hiện tại đơn).\n  - Mệnh đề chính: 'you will pass the exam with a high score'.\n• Phương án B sai vì mệnh đề If dùng 'studied' (quá khứ) kết hợp với 'will pass' (không chuẩn công thức).\n• Phương án C sai vì mệnh đề chính dùng 'passed' (quá khứ).",
+    translation: "Nếu bạn học hành chăm chỉ, bạn sẽ vượt qua kỳ thi với số điểm cao."
+  },
+  {
+    id: 10,
+    prompt: "10- She / always / forget / to / bring / her / umbrella / when / it / rain.",
+    options: {
+      A: "She always forgets to bring her umbrella when it rains.",
+      B: "She always forgot to bring her umbrella when it is rain.",
+      C: "She always forget to bring her umbrella when it was rained."
+    },
+    correct: "A",
+    explanation: "• Câu diễn đạt một thói quen cố hữu hoặc một sự thật hiển nhiên -> Dùng thì Hiện tại đơn cho cả hai mệnh đề:\n  - Mệnh đề chính: Chủ ngữ ngôi thứ 3 số ít 'She' -> Động từ thêm -s: 'forgets to bring'.\n  - Mệnh đề thời gian: 'when it rains' (chủ ngữ 'it' ngôi thứ ba số ít -> 'rains').\n• Phương án B sai vì dùng 'forgot' (quá khứ) kết hợp với cấu trúc sai 'when it is rain'.\n• Phương án C sai vì 'forget' chưa chia ngôi thứ 3 số ít và 'when it was rained' sai ngữ pháp.",
+    translation: "Cô ấy luôn quên mang theo ô mỗi khi trời mưa."
+  },
+  {
+    id: 11,
+    prompt: "11- Last summer, / we / go / a / long / road trip / across / three / countries.",
+    options: {
+      A: "Last summer, we go a long road trip across three countries.",
+      B: "Last summer, we went on a long road trip across three countries.",
+      C: "Last summer, we were going a long road trip across three countries."
+    },
+    correct: "B",
+    explanation: "• Dấu hiệu thời gian: 'Last summer' (mùa hè năm ngoái) -> Bắt buộc dùng thì Quá khứ đơn (Past Simple): 'go' đổi thành 'went'.\n• Cụm từ cố định trong tiếng Anh: 'go on a road trip' (đi một chuyến du lịch bằng đường bộ/xe hơi).\n• Phương án A sai vì dùng thì hiện tại 'go' và thiếu giới từ 'on'.\n• Phương án C sai vì dùng thì quá khứ tiếp diễn và thiếu giới từ 'on'.",
+    translation: "Mùa hè năm ngoái, chúng tôi đã có một chuyến du lịch bằng đường bộ dài đi qua ba quốc gia."
+  },
+  {
+    id: 12,
+    prompt: "12- I / read / a / magazine / when / someone / knock / door.",
+    options: {
+      A: "I was reading a magazine when someone knocked on the door.",
+      B: "I read a magazine when someone knocked on door.",
+      C: "I am reading a magazine when someone knocked on door."
+    },
+    correct: "A",
+    explanation: "• Sự kết hợp giữa thì Quá khứ tiếp diễn và Quá khứ đơn: Diễn tả một hành động kéo dài đang diễn ra trong quá khứ ('was reading a magazine') thì một hành động ngắn khác cắt ngang ('someone knocked on the door').\n• Cụm giới từ chuẩn: 'knock on the door' (gõ cửa, cần có giới từ 'on' và mạo từ xác định 'the').\n• Phương án B sai vì thiếu thì tiếp diễn và thiếu 'the' trước 'door'.\n• Phương án C sai vì dùng thì hiện tại tiếp diễn 'am reading' kết hợp với quá khứ 'knocked' là khập khiễng.",
+    translation: "Tôi đang đọc một cuốn tạp chí thì có ai đó gõ cửa."
+  },
+  {
+    id: 13,
+    prompt: "13- She / meet / her / friend / the / airport / tomorrow / in / the morning.",
+    options: {
+      A: "She met her friend on the airport tomorrow in the morning.",
+      B: "She is going to meet her friend at the airport tomorrow in the morning.",
+      C: "She meets her friend in the airport tomorrow in the morning."
+    },
+    correct: "B",
+    explanation: "• Dấu hiệu thời gian: 'tomorrow in the morning' (sáng mai) diễn tả một kế hoạch/sự việc đã lên lịch trước trong tương lai gần -> Dùng cấu trúc 'be going to + V': 'is going to meet'.\n• Giới từ chỉ địa điểm cụ thể: 'at the airport' (ở sân bay).\n• Phương án A sai vì dùng thì quá khứ 'met' và sai giới từ 'on the airport'.\n• Phương án C dùng thì hiện tại đơn ít tự nhiên bằng tương lai gần cho một cuộc hẹn cá nhân, và giới từ 'at the airport' chuẩn xác hơn.",
+    translation: "Cô ấy dự định sẽ đón/gặp người bạn của mình tại sân bay vào sáng mai."
+  },
+  {
+    id: 14,
+    prompt: "14- We / not / go / picnic / because / it / rain / very / heavily.",
+    options: {
+      A: "We didn’t go on a picnic because it was raining very heavily.",
+      B: "We don’t go picnic because it rained very heavily.",
+      C: "We won’t go on picnic because it rains very heavily."
+    },
+    correct: "A",
+    explanation: "• Cụm từ thành ngữ: 'go on a picnic' (đi dã ngoại).\n• Ngữ cảnh quá khứ kết hợp giải thích nguyên nhân: Sự việc không đi dã ngoại đã xảy ra trong quá khứ ('We didn’t go on a picnic') vì thời điểm đó trời đang mưa như trút nước ('because it was raining very heavily').\n• Phương án B sai vì thiếu giới từ 'on' (go picnic là sai) và thì không hòa hợp (don't - rained).\n• Phương án C sai vì thiếu mạo từ 'a' (go on a picnic) và tương lai won't không hợp logic.",
+    translation: "Chúng tôi đã không đi dã ngoại vì lúc đó trời đang mưa rất to."
+  },
+  {
+    id: 15,
+    prompt: "15- when / you / travel / another / country, / you / have / take / passport.",
+    options: {
+      A: "When you travel to another countries, you have taken passport.",
+      B: "When you traveled to another country, you have took your passport.",
+      C: "When you travel to another country, you have to take your passport."
+    },
+    correct: "C",
+    explanation: "• Câu diễn tả một quy định/thực tế tất yếu: Dùng thì Hiện tại đơn.\n• Lượng từ 'another' luôn đi với danh từ đếm được số ít: 'another country' (phương án A dùng 'another countries' là sai ngữ pháp).\n• Cấu trúc chỉ sự bắt buộc: 'have to + V(nguyên mẫu)': 'have to take your passport' (phải mang theo hộ chiếu của bạn).\n• Phương án B sai vì dùng 'have took' (chia sai thì và dạng phân từ).",
+    translation: "Khi bạn đi du lịch đến một quốc gia khác, bạn phải mang theo hộ chiếu của mình."
+  },
+  {
+    id: 16,
+    prompt: "16- if / film / gripping, / you / can’t / stop / watch / because / it / so exciting.",
+    options: {
+      A: "If a film is gripping, you can’t stop watching it because it’s so exciting.",
+      B: "If a film gripping, you can’t stop watch because it’s so exciting.",
+      C: "If a film is gripping, you can’t be stopped to watch it because it’s so exciting."
+    },
+    correct: "A",
+    explanation: "• Mệnh đề điều kiện: 'If a film is gripping' (cần có động từ to be 'is' bổ nghĩa cho tính từ gripping - hấp dẫn, cuốn hút).\n• Cấu trúc động từ: 'stop + V-ing' nghĩa là dừng hẳn việc đang làm lại: 'can’t stop watching it' (không thể ngừng xem được).\n• Phương án B sai vì mệnh đề If thiếu to be 'is' và dùng 'stop watch'.\n• Phương án C dùng dạng bị động 'can't be stopped to watch' là sai cấu trúc và không tự nhiên.",
+    translation: "Nếu một bộ phim hấp dẫn, bạn không thể ngừng xem nó vì nó quá đỗi lôi cuốn."
+  },
+  {
+    id: 17,
+    prompt: "17- Peter / spend / three / hour / do homework / last night.",
+    options: {
+      A: "Peter spent three hours doing homework last night.",
+      B: "Peter spends three hours to do homework last night.",
+      C: "Peter spent three hours to doing homework last night."
+    },
+    correct: "A",
+    explanation: "• Dấu hiệu nhận biết: 'last night' (tối qua) -> Dùng thì Quá khứ đơn: động từ 'spend' chuyển thành 'spent'.\n• Cấu trúc ngữ pháp chuẩn: S + spend + time + V-ing (dành bao nhiêu thời gian làm việc gì) -> 'spent three hours doing homework'.\n• Số lượng 'three' đi với danh từ số nhiều: 'hours'.\n• Phương án B sai vì dùng thì hiện tại 'spends' và dùng 'to do'.\n• Phương án C sai vì dùng 'to doing'.",
+    translation: "Peter đã dành ba tiếng đồng hồ để làm bài tập về nhà vào tối qua."
+  },
+  {
+    id: 18,
+    prompt: "18- he / journalist / because / he /responsible / report / news / magazine.",
+    options: {
+      A: "He was journalist because he responsible report the news for magazine.",
+      B: "He has been a journalist because he was responsible reporting the news for a magazine.",
+      C: "He’s a journalist because he is responsible for reporting the news for a magazine."
+    },
+    correct: "C",
+    explanation: "• Danh từ chỉ nghề nghiệp số ít cần mạo từ: 'He’s a journalist' (Anh ấy là một nhà báo).\n• Cấu trúc tính từ đi với giới từ: 'be responsible for + V-ing/Noun' (chịu trách nhiệm về việc gì) -> 'is responsible for reporting the news for a magazine'.\n• Phương án A sai vì thiếu mạo từ 'a', thiếu to be 'is', thiếu giới từ 'for' sau responsible và dùng động từ nguyên mẫu 'report'.\n• Phương án B sai vì thiếu giới từ 'for' sau 'responsible'.",
+    translation: "Anh ấy là một nhà báo vì anh chịu trách nhiệm đưa tin cho một tạp chí."
+  },
+  {
+    id: 19,
+    prompt: "19- I / planning / go / swim / my friend Bill / tomorrow /.",
+    options: {
+      A: "I’m planning going to swim with my friend Bill tomorrow.",
+      B: "I’m planning to go swimming with my friend Bill tomorrow.",
+      C: "I’m planning to going swimming with my friend Bill tomorrow."
+    },
+    correct: "B",
+    explanation: "• Cấu trúc diễn tả dự định tương lai: S + be planning + to V(nguyên mẫu) -> 'I'm planning to go...'.\n• Cụm hoạt động thể thao/giải trí với 'go': 'go + V-ing' -> 'go swimming' (đi bơi).\n• Kết hợp hoàn chỉnh: 'I’m planning to go swimming with my friend Bill tomorrow.'\n• Phương án A sai vì dùng 'planning going to swim'.\n• Phương án C sai vì dùng 'to going'.",
+    translation: "Tôi đang lên kế hoạch đi bơi cùng bạn tôi là Bill vào ngày mai."
+  },
+  {
+    id: 20,
+    prompt: "20- you / should / put / hand / some ice / and / some garlic / each wrist /.",
+    options: {
+      A: "You should put hand on some ice, and some garlic in each wrist.",
+      B: "You should put your hand in some ice, and some garlic on each wrist.",
+      C: "You should not put hand in some ice, and some garlic in each wrist."
+    },
+    correct: "B",
+    explanation: "• Lời khuyên mẹo dân gian/sức khỏe: Dùng động từ khuyết thiếu 'should + V'.\n• Giới từ phù hợp với từng bộ phận và hành động:\n  - Đặt bàn tay vào trong đá: 'put your hand in some ice'.\n  - Đặt tỏi lên bề mặt cổ tay: 'and some garlic on each wrist'.\n• Phương án A sai giới từ: 'hand on some ice' và 'garlic in each wrist' (không thể nhét tỏi vào trong cổ tay).\n• Phương án C thiếu tính từ sở hữu 'your hand' và sai giới từ.",
+    translation: "Bạn nên ngâm tay vào một ít đá lạnh, và đặt vài tép tỏi lên mỗi bên cổ tay."
+  },
+  {
+    id: 21,
+    prompt: "21- how / many times / you / be / sick / the last year /?",
+    options: {
+      A: "How many times have you been sick in the last year?",
+      B: "How many times did you be sick the last year?",
+      C: "How many times you have been sick last year?"
+    },
+    correct: "A",
+    explanation: "• Cụm từ 'in the last year' (trong năm vừa qua tính đến thời điểm nói) kết hợp với câu hỏi tần suất 'How many times' (bao nhiêu lần) -> Bắt buộc dùng thì Hiện tại hoàn thành (Present Perfect): How many times + have/has + S + V3/ed?\n• Với chủ ngữ 'you', đảo trợ động từ 'have' lên trước: 'How many times have you been sick in the last year?'\n• Phương án B sai vì động từ to be không dùng trợ động từ 'did you be'.\n• Phương án C sai cấu trúc câu hỏi vì chưa đảo ngữ trợ động từ 'have' lên trước 'you'.",
+    translation: "Bạn đã bị ốm bao nhiêu lần trong năm vừa qua?"
+  },
+  {
+    id: 22,
+    prompt: "22- when / you / feel / under stress / body / produce / more / hormones / adrenaline and cortisol /.",
+    options: {
+      A: "When you feel under stress, your body produce more of hormones the adrenaline and cortisol.",
+      B: "When you feel under stress, your body produced more of hormones adrenaline and cortisol.",
+      C: "When you feel under stress, your body produces more of the hormones adrenaline and cortisol."
+    },
+    correct: "C",
+    explanation: "• Câu diễn tả sự thật khoa học/sinh học hiển nhiên -> Dùng thì Hiện tại đơn.\n• Mệnh đề phụ: 'When you feel under stress' (cụm 'under stress' = bị căng thẳng, áp lực).\n• Mệnh đề chính: Chủ ngữ 'your body' là ngôi thứ 3 số ít -> Động từ phải thêm -s: 'produces' (loại phương án A vì dùng 'produce' nguyên mẫu, loại B vì dùng quá khứ 'produced').\n• Cụm danh từ: 'more of the hormones adrenaline and cortisol' (nhiều hơn các loại hormone adrenaline và cortisol).",
+    translation: "Khi bạn cảm thấy căng thẳng, cơ thể bạn sẽ sản sinh ra nhiều hormone adrenaline và cortisol hơn."
+  },
+  {
+    id: 23,
+    prompt: "23- I / remember / meet / my best friend / the first time / the summer camp / five years ago /.",
+    options: {
+      A: "I remember meeting my best friend for the first time at the summer camp five years ago.",
+      B: "I remembered to meet my best friend for the first time in the summer camp five years ago.",
+      C: "I remembered to meeting my best friend for the first time to the summer camp five years ago."
+    },
+    correct: "A",
+    explanation: "• Cấu trúc phân biệt 'remember':\n  - Remember + V-ing: Nhớ lại một sự việc, kỷ niệm đã xảy ra trong quá khứ -> 'remember meeting my best friend' (ở hiện tại nhớ lại việc đã gặp).\n  - Remember + to V: Nhớ phải làm gì (bổn phận, nhiệm vụ).\n• Cụm từ cố định: 'for the first time' (lần đầu tiên) và 'at the summer camp' (tại trại hè).\n• Phương án B & C sai cấu trúc 'remember to meet' / 'to meeting' và sai thì/giới từ.",
+    translation: "Tôi nhớ đã gặp người bạn thân nhất của mình lần đầu tiên tại trại hè cách đây 5 năm."
+  },
+  {
+    id: 24,
+    prompt: "24- scientists / have / also / discover / that / stress / can / lead / loss / brain cells /.",
+    options: {
+      A: "Scientists have also discovered that stress can lead to the loss of brain cells.",
+      B: "Scientists has also discovered that stress can lead to the loss of brain cells.",
+      C: "Scientists have also discovered that stress could leads to the loss of brain cells."
+    },
+    correct: "A",
+    explanation: "• Chủ ngữ 'Scientists' là danh từ số nhiều -> Đi với trợ động từ 'have' trong thì Hiện tại hoàn thành: 'have also discovered' (loại B vì dùng 'has').\n• Cấu trúc: 'lead to + Noun phrase' (dẫn đến cái gì) -> 'lead to the loss of brain cells' (dẫn đến sự mất mát các tế bào não).\n• Phương án C sai nghiêm trọng vì sau động từ khuyết thiếu 'could', động từ phải ở dạng nguyên mẫu 'lead' chứ không được thêm -s thành 'could leads'.",
+    translation: "Các nhà khoa học cũng đã phát hiện ra rằng căng thẳng có thể dẫn đến việc mất đi các tế bào não."
+  },
+  {
+    id: 25,
+    prompt: "25- people / who / be / suffer / stress / do / not / work / well as / usual /.",
+    options: {
+      A: "People who is suffering from stress do not work as well as usual.",
+      B: "People who are suffering from stress does not work as well as usual.",
+      C: "People who are suffering from stress do not work as well as usual."
+    },
+    correct: "C",
+    explanation: "• 'People' là danh từ số nhiều (những người):\n  - Trong mệnh đề quan hệ: 'who are suffering from stress' (dùng to be 'are' và cụm 'suffer from stress' = chịu đựng căng thẳng. Phương án A sai vì dùng 'who is').\n  - Ở mệnh đề chính: Chủ ngữ chính là 'People' (số nhiều) nên trợ động từ phủ định phải là 'do not work' (phương án B sai vì dùng 'does not work').\n• Cấu trúc so sánh bằng: 'as well as usual' (tốt như bình thường).\n• Phương án C chính xác hoàn toàn về mọi mặt ngữ pháp.",
+    translation: "Những người đang bị căng thẳng thường không làm việc hiệu quả như bình thường."
+  },
+  {
+    id: 26,
+    prompt: "26- you / have / got / bad back / so / I / not / think / you / should / lift / heavy box /.",
+    options: {
+      A: "You’ve got a bad back, so I don’t think you should lift that heavy box.",
+      B: "You’ve got bad back, so I don’t think you should to lift that heavy box.",
+      C: "You’ve got a bad back, so I don’t think you lifting that heavy box."
+    },
+    correct: "A",
+    explanation: "• Cụm từ chỉ tình trạng sức khỏe: 'have got a bad back' (bị đau lưng, cần mạo từ 'a').\n• Đưa ra lời khuyên can ngăn: 'I don’t think you should + V(nguyên mẫu)' -> 'should lift that heavy box' (sau modal verb 'should' dùng động từ nguyên mẫu không 'to').\n• Phương án B sai vì thiếu 'a' trước 'bad back' và dùng 'should to lift'.\n• Phương án C sai vì dùng 'you lifting' thiếu động từ khuyết thiếu 'should'.",
+    translation: "Bạn đang bị đau lưng, vì vậy tôi không nghĩ bạn nên nhấc chiếc hộp nặng đó đâu."
+  },
+  {
+    id: 27,
+    prompt: "27- government / should / do / more / sort / the problem / out /.",
+    options: {
+      A: "The government should do more to sort the problem out.",
+      B: "Government should to do more to sort the problem out.",
+      C: "The government should do more for sort the problem out."
+    },
+    correct: "A",
+    explanation: "• Danh từ xác định chỉ chính phủ: Cần mạo từ 'The government'.\n• Sau động từ khuyết thiếu 'should': Dùng động từ nguyên mẫu không 'to' ('should do').\n• Mệnh đề chỉ mục đích: 'to + V' -> 'to sort the problem out' (để giải quyết triệt để vấn đề). Cụm động từ 'sort sth out' = giải quyết, tháo gỡ khó khăn.\n• Phương án B sai vì thiếu 'The' và dùng 'should to do'.\n• Phương án C sai vì dùng 'for sort' (sau giới từ for phải là V-ing, và chỉ mục đích hành động ta dùng 'to V').",
+    translation: "Chính phủ nên hành động nhiều hơn nữa để giải quyết vấn đề này."
+  },
+  {
+    id: 28,
+    prompt: "28- if / you / go / Seville / you / really / not / ignore / cathedral / there /.",
+    options: {
+      A: "If you go for Seville, you really don’t should ignore the cathedral there.",
+      B: "If you go to Seville, you really shouldn’t to ignore the cathedral there.",
+      C: "If you go to Seville, you really shouldn’t ignore the cathedral there."
+    },
+    correct: "C",
+    explanation: "• Di chuyển đến địa điểm: 'go to Seville' (đi đến thành phố Seville - loại phương án A vì dùng 'go for').\n• Đưa ra lời khuyên nhiệt tình: 'really shouldn’t + V(nguyên mẫu)' -> 'really shouldn't ignore the cathedral there' (thực sự không nên bỏ qua nhà thờ lớn ở đó).\n• Phương án A sai vì 'don't should'.\n• Phương án B sai vì dùng 'shouldn't to ignore' (sau shouldn't không có 'to').",
+    translation: "Nếu bạn đến Seville, bạn thực sự không nên bỏ qua nhà thờ chính tòa ở đó."
+  },
+  {
+    id: 29,
+    prompt: "29- mother / go / market / and / buy / a can / tomatoes / this morning /.",
+    options: {
+      A: "Her mother went to the market and bought a can of tomatoes this morning.",
+      B: "Her mother goes to the market and buys a can of tomatoes this morning.",
+      C: "Her mother go to the market and bought a can of tomatoes this morning."
+    },
+    correct: "A",
+    explanation: "• Dấu hiệu thời gian: 'this morning' (sáng nay - thời điểm đã trôi qua trong ngày) diễn tả chuỗi hành động đã kết thúc trong quá khứ -> Dùng thì Quá khứ đơn (Past Simple): 'went... and bought...'.\n• Cụm từ thông dụng: 'go to the market' (đi chợ) và 'a can of tomatoes' (một lon cà chua).\n• Phương án B sai vì chia thì hiện tại đơn 'goes... and buys'.\n• Phương án C sai vì dùng 'go' nguyên mẫu đi với chủ ngữ số ít 'Her mother' và cọc cạch với 'bought'.",
+    translation: "Mẹ cô ấy đã đi chợ và mua một lon cà chua vào sáng nay."
+  },
+  {
+    id: 30,
+    prompt: "30- he / usually / have / a slice / bread / or / a piece / cake / breakfast /.",
+    options: {
+      A: "He usually have a slice of bread or piece of cake in breakfast.",
+      B: "He usually has a slice of bread or a piece of cake for breakfast.",
+      C: "He usually had a slice bread or a piece cake for breakfast."
+    },
+    correct: "B",
+    explanation: "• Diễn tả thói quen ăn uống hàng ngày (trạng từ 'usually') -> Dùng thì Hiện tại đơn: Chủ ngữ 'He' (ngôi 3 số ít) đi với động từ 'has' (loại A vì dùng 'have').\n• Cụm từ định lượng: 'a slice of bread' (một lát bánh mì), 'a piece of cake' (một miếng bánh ngọt).\n• Giới từ chỉ bữa ăn trong ngày: 'for breakfast' (cho bữa sáng - loại A vì dùng 'in breakfast').\n• Phương án C sai vì thiếu giới từ 'of' ('slice bread', 'piece cake') và chia thì quá khứ 'had'.",
+    translation: "Anh ấy thường ăn một lát bánh mì hoặc một miếng bánh ngọt cho bữa sáng."
+  },
+  {
+    id: 31,
+    prompt: "31- when / temperatures / be / very low / we / also / need / drink / more / than / normal day /.",
+    options: {
+      A: "When temperatures is very low, we also need drinking more than on a normal day.",
+      B: "When temperatures are very low, we also need to drink more than on a normal day.",
+      C: "When temperatures are very low, we also needed to drinking more than on a normal day."
+    },
+    correct: "B",
+    explanation: "• Chủ ngữ 'temperatures' là danh từ số nhiều -> Động từ to be phải là 'are' (loại A vì dùng 'temperatures is').\n• Cấu trúc động từ: 'need to + V(nguyên mẫu)' (cần phải làm gì) -> 'need to drink' (loại C vì dùng 'needed to drinking').\n• Cụm so sánh: 'more than on a normal day' (nhiều hơn vào một ngày bình thường).\n• Phương án B chuẩn xác và tự nhiên nhất.",
+    translation: "Khi nhiệt độ xuống rất thấp, chúng ta cũng cần phải uống nhiều nước hơn so với một ngày bình thường."
+  },
+  {
+    id: 32,
+    prompt: "32- can / we / get / water / we / need / other drinks / food /?",
+    options: {
+      A: "Can we get the water we need from other drinks or food?",
+      B: "Can we get water we need of the other drinks and food?",
+      C: "Can we getting water we need from other drinks or food?"
+    },
+    correct: "A",
+    explanation: "• Câu hỏi với động từ khuyết thiếu: Can + S + V(nguyên mẫu)? -> 'Can we get...' (loại C vì dùng 'Can we getting').\n• Mệnh đề quan hệ xác định: 'the water (that) we need' (nguồn nước mà chúng ta cần, có mạo từ xác định 'the').\n• Giới từ chỉ nguồn gốc, xuất xứ: 'from other drinks or food' (từ các thức uống khác hoặc thức ăn - loại B vì dùng sai giới từ 'of').\n• Phương án A chính xác hoàn toàn.",
+    translation: "Liệu chúng ta có thể nạp lượng nước mình cần từ các loại đồ uống khác hoặc thức ăn không?"
+  },
+  {
+    id: 33,
+    prompt: "33- do / people / your country / like / go / cinema / to watch / film /.",
+    options: {
+      A: "Do people of your country like to going to cinema to watch film?",
+      B: "Do people in your country like to go to a cinema to watch a film?",
+      C: "Do people from your country like go to a cinema to watching a film?"
+    },
+    correct: "B",
+    explanation: "• Cấu trúc động từ chỉ sở thích: 'like + to V' -> 'like to go' (loại A vì 'like to going', loại C vì 'like go').\n• Mạo từ và giới từ chỉ nơi chốn: 'people in your country' (mọi người ở đất nước bạn), 'to go to a cinema to watch a film' (đến rạp chiếu phim để xem một bộ phim).\n• Chỉ mục đích: 'to watch a film' (loại C vì dùng 'to watching').\n• Phương án B chuẩn xác về cả ngữ pháp lẫn văn phong.",
+    translation: "Người dân ở đất nước bạn có thích đến rạp chiếu phim để xem phim không?"
+  },
+  {
+    id: 34,
+    prompt: "34- what / be / scariest film / that / you / ever / see /?",
+    options: {
+      A: "What is the scariest film that you’ve ever seen?",
+      B: "What was the scariest film that you ever saw?",
+      C: "What is scarier film that you’ve ever saw?"
+    },
+    correct: "A",
+    explanation: "• Cấu trúc câu so sánh nhất kết hợp với thì Hiện tại hoàn thành để diễn tả trải nghiệm từ trước đến thời điểm hiện tại:\n  - Cấu trúc: What is the + Adj-est / most Adj + (Noun) + that + S + have/has ever + V3/ed?\n  - 'the scariest film that you have ever seen'.\n• Phương án B dùng thì quá khứ đơn 'ever saw' không đúng mô thức ngữ pháp chuẩn của câu hỏi trải nghiệm.\n• Phương án C sai ngữ pháp vì dùng so sánh hơn 'scarier' và dạng động từ sai 'have ever saw'.",
+    translation: "Bộ phim đáng sợ nhất mà bạn từng xem trong đời là gì?"
+  },
+  {
+    id: 35,
+    prompt: "35- the big fashion houses / try / persuade / most popular female stars / wear / their dresses /.",
+    options: {
+      A: "The big fashion houses try to persuade the most popular female stars to wear their dresses.",
+      B: "The big fashion houses had tried persuading the most popular female stars to wear their dresses.",
+      C: "The big fashion houses tried persuade most popular female stars to wearing their dresses."
+    },
+    correct: "A",
+    explanation: "• Cấu trúc động từ kết hợp:\n  - 'try to + V': cố gắng làm việc gì -> 'try to persuade...'.\n  - 'persuade someone to + V': thuyết phục ai đó làm gì -> 'persuade ... to wear their dresses'.\n• Cấp so sánh nhất: 'the most popular female stars' (những ngôi sao nữ nổi tiếng nhất).\n• Phương án B dùng thì quá khứ hoàn thành 'had tried' không cần thiết và cấu trúc 'persuade... to wear' chưa tự nhiên.\n• Phương án C sai vì 'tried persuade' thiếu 'to' và dùng 'to wearing'.",
+    translation: "Các nhà mốt thời trang lớn luôn cố gắng thuyết phục các nữ minh tinh nổi tiếng nhất mặc trang phục của họ."
+  },
+  {
+    id: 36,
+    prompt: "36- life / be / more stressful / since / she / have / second child /.",
+    options: {
+      A: "Her life was more stressful since she would have second child.",
+      B: "Her life is more stressful since she has her second child.",
+      C: "Her life has been more stressful since she had her second child."
+    },
+    correct: "C",
+    explanation: "• Quy tắc phối hợp thì kinh điển với liên từ 'since':\n  - Mệnh đề chính (trước since): Dùng thì Hiện tại hoàn thành (Present Perfect) -> 'Her life has been more stressful' (Cuộc sống của cô ấy đã trở nên căng thẳng hơn kéo dài từ quá khứ đến hiện tại).\n  - Mệnh đề thời gian (sau since): Dùng thì Quá khứ đơn (Past Simple) làm mốc thời gian -> 'since she had her second child' (kể từ khi cô ấy sinh đứa con thứ hai).\n• Phương án A & B vi phạm quy tắc phối hợp thì với 'since' ('was / would have', 'is / has').",
+    translation: "Cuộc sống của cô ấy đã trở nên căng thẳng, áp lực hơn kể từ khi cô sinh đứa con thứ hai."
+  },
+  {
+    id: 37,
+    prompt: "37- Robert Pattinson / be / one / good-looking actors / Hollywood /.",
+    options: {
+      A: "Robert Pattinson is one of the most good-looking actors in Hollywood.",
+      B: "Robert Pattinson is one best-looking actors in Hollywood.",
+      C: "Robert Pattinson was one of the good-looking actors in Hollywood."
+    },
+    correct: "A",
+    explanation: "• Cấu trúc so sánh nhất chỉ một trong những đối tượng nổi bật nhất: 'one of the most + Adj + Plural Noun': 'one of the most good-looking actors in Hollywood' (một trong những nam diễn viên ưa nhìn/đẹp trai nhất Hollywood).\n• Phương án B sai vì thiếu cụm 'of the' và dùng cấu trúc sai.\n• Phương án C sai vì thiếu cấp so sánh nhất ('the most') và dùng thì quá khứ 'was' không phù hợp khi diễn tả một nhận định thực tế hiện nay.",
+    translation: "Robert Pattinson là một trong những nam diễn viên điển trai nhất ở Hollywood."
+  },
+  {
+    id: 38,
+    prompt: "38- tourists / have / eat / traditional restaurants / enjoy / the local culture/.",
+    options: {
+      A: "Tourists has eaten in traditional restaurants to enjoy the local culture.",
+      B: "Tourists have to eat in traditional restaurants to enjoy the local culture.",
+      C: "Tourists have eating on traditional restaurants to enjoying the local culture."
+    },
+    correct: "B",
+    explanation: "• Cấu trúc động từ khuyết thiếu chỉ sự cần thiết/lời khuyên: 'have to + V(nguyên mẫu)' -> 'have to eat in traditional restaurants' (nên/phải ăn tại các nhà hàng truyền thống).\n• Mệnh đề chỉ mục đích: 'to + V(nguyên mẫu)' -> 'to enjoy the local culture' (để tận hưởng/trải nghiệm văn hóa địa phương).\n• Phương án A sai vì chủ ngữ số nhiều 'Tourists' không thể đi với trợ động từ 'has'.\n• Phương án C sai ngữ pháp nghiêm trọng ('have eating', 'on traditional restaurants', 'to enjoying').",
+    translation: "Khách du lịch nên dùng bữa tại các nhà hàng truyền thống để thưởng thức nét văn hóa địa phương."
+  },
+  {
+    id: 39,
+    prompt: "39- you / must not / take / course / without / check / requirements / first /.",
+    options: {
+      A: "You mustn’t to take course without checking the requirements first.",
+      B: "You mustn’t take course without to check the requirements first.",
+      C: "You mustn’t take a course without checking the requirements first."
+    },
+    correct: "C",
+    explanation: "• Sau động từ khuyết thiếu cấm đoán 'mustn’t': Bắt buộc dùng động từ nguyên mẫu không 'to' ('mustn’t take'). Loại A vì dùng 'mustn't to take'.\n• Danh từ đếm được số ít: 'a course' (một khóa học), cần có mạo từ 'a'. Loại A & B vì thiếu mạo từ 'a'.\n• Sau giới từ 'without': Động từ ở dạng danh động từ (V-ing) -> 'without checking the requirements first' (mà không kiểm tra các yêu cầu trước). Loại B vì dùng 'without to check'.\n• Phương án C chuẩn xác 100% về mọi quy tắc ngữ pháp.",
+    translation: "Bạn không được tham gia khóa học mà không kiểm tra trước các yêu cầu điều kiện."
+  },
+  {
+    id: 40,
+    prompt: "40- are / you / sure / you / want / throw / those old books / magazines /?",
+    options: {
+      A: "Are you sure you want to throw away those old books and magazines?",
+      B: "Are you sure you want to throw out that old books and magazines?",
+      C: "Are you sure you want throwing off those old books and magazines?"
+    },
+    correct: "A",
+    explanation: "• Cấu trúc hỏi mức độ chắc chắn: 'Are you sure (that) you want to + V?' -> 'want to throw away' (loại C vì dùng 'want throwing off').\n• Cụm động từ: 'throw away' (vứt bỏ đi thứ gì không còn dùng nữa).\n• Đại từ chỉ định số nhiều đi với danh từ số nhiều: 'those old books and magazines' (loại B vì dùng đại từ số ít 'that' đi kèm danh từ số nhiều 'old books').\n• Phương án A chính xác hoàn toàn.",
+    translation: "Bạn có chắc là bạn muốn vứt bỏ những cuốn sách và tạp chí cũ đó đi không?"
+  }
+];
+
+// Safe Storage Helper
+const safeStorage = {
+  getItem: (key, fallback = "") => {
+    try {
+      return localStorage.getItem(key) || fallback;
+    } catch (e) {
+      return fallback;
+    }
+  },
+  setItem: (key, val) => {
+    try {
+      localStorage.setItem(key, val);
+    } catch (e) {}
+  }
+};
+
+const safeSession = {
+  getItem: (key, fallback = "") => {
+    try {
+      return sessionStorage.getItem(key) || fallback;
+    } catch (e) {
+      return fallback;
+    }
+  },
+  setItem: (key, val) => {
+    try {
+      sessionStorage.setItem(key, val);
+    } catch (e) {}
+  }
+};
+
+document.addEventListener("DOMContentLoaded", () => {
+  const state = {
+    student: {
+      name: safeStorage.getItem("tdc_ta2_name", ""),
+      id: safeStorage.getItem("tdc_ta2_id", ""),
+      classroom: safeStorage.getItem("tdc_ta2_class", "")
+    },
+    answers: {},
+    flags: new Set(),
+    isSubmitted: false,
+    elapsedSeconds: 0,
+    timerInterval: null,
+    filterMode: "all",
+    visitorCount: 1
+  };
+
+  // DOM Elements
+  const questionsContainer = document.getElementById("questionsContainer");
+  const questionsGrid = document.getElementById("questionsGrid");
+  const progressText = document.getElementById("progressText");
+  const progressBarFill = document.getElementById("progressBarFill");
+  const headerProgressEl = document.getElementById("headerProgress");
+  const timerDisplay = document.getElementById("timerDisplay");
+  const visitorCountEl = document.getElementById("visitorCount");
+  const btnStudentInfo = document.getElementById("btnStudentInfo");
+
+  // Results elements
+  const resultsSummaryCard = document.getElementById("resultsSummaryCard");
+  const reviewFilterBar = document.getElementById("reviewFilterBar");
+  const scoreRawEl = document.getElementById("scoreRaw");
+  const scoreScale10El = document.getElementById("scoreScale10");
+  const scorePercentageEl = document.getElementById("scorePercentage");
+  const timeTakenEl = document.getElementById("timeTaken");
+  const scoreRatingEl = document.getElementById("scoreRating");
+  const correctCountEl = document.getElementById("correctCount");
+  const wrongCountEl = document.getElementById("wrongCount");
+
+  // Modals
+  const studentModal = document.getElementById("studentModal");
+  const submitConfirmModal = document.getElementById("submitConfirmModal");
+  const teacherModal = document.getElementById("teacherModal");
+
+  // Meta displays
+  const studentNameDisplay = document.getElementById("studentNameDisplay");
+  const studentIdDisplay = document.getElementById("studentIdDisplay");
+  const studentClassDisplay = document.getElementById("studentClassDisplay");
+
+  /* ================= 1. VISITOR COUNTER ================= */
+  async function initVisitorCounter() {
+    const namespace = "tdc-ta2-sentence-building";
+    const key = "page-visits";
+    const storageKey = "tdc_ta2_cached_visits";
+
+    let localVisits = parseInt(safeStorage.getItem(storageKey, "1"), 10);
+    const hasVisitedSession = safeSession.getItem("tdc_ta2_visited");
+
+    if (!hasVisitedSession) {
+      localVisits += 1;
+      safeStorage.setItem(storageKey, localVisits);
+      safeSession.setItem("tdc_ta2_visited", "true");
+    }
+
+    if (visitorCountEl) visitorCountEl.textContent = localVisits;
+    state.visitorCount = localVisits;
+
+    try {
+      const url = `https://api.counterapi.dev/v1/${namespace}/${key}/up`;
+      const res = await fetch(url, { method: "GET" });
+      if (res.ok) {
+        const data = await res.json();
+        if (data && typeof data.count === "number") {
+          if (visitorCountEl) visitorCountEl.textContent = data.count;
+          state.visitorCount = data.count;
+          safeStorage.setItem(storageKey, data.count);
+          const adminTotal = document.getElementById("teacherVisitorTotal");
+          if (adminTotal) adminTotal.textContent = data.count;
+        }
+      }
+    } catch (err) {
+      console.log("Visitor API using local count:", err);
+    }
+  }
+
+  /* ================= 2. STUDENT INFO ================= */
+  function updateStudentDisplay() {
+    if (studentNameDisplay) studentNameDisplay.textContent = state.student.name || "Chưa nhập";
+    if (studentIdDisplay) studentIdDisplay.textContent = state.student.id || "Chưa nhập";
+    if (studentClassDisplay) studentClassDisplay.textContent = state.student.classroom || "Chưa nhập";
+
+    if (btnStudentInfo) {
+      if (state.student.name) {
+        const shortName = state.student.name.split(" ").slice(-2).join(" ");
+        const studentTag = state.student.id ? `${shortName} (${state.student.id})` : shortName;
+        btnStudentInfo.innerHTML = `<span>📝</span> <span>${studentTag}</span>`;
+        btnStudentInfo.title = `Sinh viên: ${state.student.name} - MSSV: ${state.student.id || "N/A"}`;
+      } else {
+        btnStudentInfo.innerHTML = `<span>📝</span> <span>Nhập Họ tên & MSSV</span>`;
+      }
+    }
+
+    const inName = document.getElementById("inputStudentName");
+    const inId = document.getElementById("inputStudentId");
+    const inClass = document.getElementById("inputStudentClass");
+    if (inName) inName.value = state.student.name;
+    if (inId) inId.value = state.student.id;
+    if (inClass) inClass.value = state.student.classroom;
+  }
+
+  window.openStudentModal = function() {
+    if (studentModal) studentModal.classList.add("open");
+  };
+
+  window.closeStudentModal = function() {
+    if (studentModal) studentModal.classList.remove("open");
+  };
+
+  window.saveStudentInfo = function(e) {
+    if (e) e.preventDefault();
+    const inName = document.getElementById("inputStudentName");
+    const inId = document.getElementById("inputStudentId");
+    const inClass = document.getElementById("inputStudentClass");
+
+    state.student.name = inName ? inName.value.trim() : "";
+    state.student.id = inId ? inId.value.trim().toUpperCase() : "";
+    state.student.classroom = inClass ? inClass.value.trim().toUpperCase() : "";
+
+    safeStorage.setItem("tdc_ta2_name", state.student.name);
+    safeStorage.setItem("tdc_ta2_id", state.student.id);
+    safeStorage.setItem("tdc_ta2_class", state.student.classroom);
+
+    updateStudentDisplay();
+    closeStudentModal();
+  };
+
+  /* ================= 3. COUNT-UP TIMER ================= */
+  function startTimer() {
+    if (state.timerInterval) clearInterval(state.timerInterval);
+    state.timerInterval = setInterval(() => {
+      state.elapsedSeconds++;
+      updateTimerDisplay();
+    }, 1000);
+  }
+
+  function updateTimerDisplay() {
+    if (!timerDisplay) return;
+    const mins = Math.floor(state.elapsedSeconds / 60);
+    const secs = state.elapsedSeconds % 60;
+    timerDisplay.textContent = `${String(mins).padStart(2, "0")}:${String(secs).padStart(2, "0")}`;
+  }
+
+  /* ================= 4. RENDER QUESTIONS & PALETTE ================= */
+  function renderQuestions() {
+    if (!questionsContainer || !questionsGrid) return;
+    questionsContainer.innerHTML = "";
+    questionsGrid.innerHTML = "";
+
+    if (typeof questionsData === "undefined" || !Array.isArray(questionsData)) {
+      questionsContainer.innerHTML = `<p style="color:red; padding:20px;">Không tìm thấy dữ liệu câu hỏi!</p>`;
+      return;
+    }
+
+    questionsData.forEach((q) => {
+      const card = document.createElement("div");
+      card.className = "question-card";
+      card.id = `qCard_${q.id}`;
+
+      // Build options HTML
+      const optionsHtml = Object.entries(q.options).map(([key, val]) => `
+        <label class="option-item" id="opt_${q.id}_${key}" onclick="selectAnswer(${q.id}, '${key}')">
+          <input type="radio" name="question_${q.id}" value="${key}" class="option-radio">
+          <div class="option-key">${key}</div>
+          <div class="option-text">${val}</div>
+        </label>
+      `).join("");
+
+      card.innerHTML = `
+        <div class="question-header">
+          <div class="question-num-badge">
+            <span>Câu ${q.id} / ${questionsData.length}</span>
+          </div>
+          <div class="question-actions-right">
+            <span class="question-status-tag" id="statusTag_${q.id}"></span>
+            <button type="button" class="btn-flag" id="btnFlag_${q.id}" onclick="toggleFlag(${q.id})">
+              <span>★</span> Đánh dấu
+            </button>
+          </div>
+        </div>
+
+        <div class="question-prompt">${q.prompt}</div>
+
+        <div class="options-group">
+          ${optionsHtml}
+        </div>
+
+        <div class="solution-box" id="solution_${q.id}" style="display: none;">
+          <div class="explanation-section">
+            <div class="section-badge">💡 GIẢI THÍCH TẠI SAO DÙNG:</div>
+            <div class="explanation-text">${q.explanation}</div>
+          </div>
+          <div class="translation-section">
+            <div class="section-badge">🇻🇳 DỊCH NGHĨA CHI TIẾT:</div>
+            <div class="translation-text">${q.translation}</div>
+          </div>
+        </div>
+      `;
+
+      questionsContainer.appendChild(card);
+
+      // Create Grid Button in Sidebar
+      const gridBtn = document.createElement("button");
+      gridBtn.type = "button";
+      gridBtn.className = "grid-btn";
+      gridBtn.id = `gridBtn_${q.id}`;
+      gridBtn.textContent = q.id;
+      gridBtn.onclick = () => scrollToQuestion(q.id);
+      questionsGrid.appendChild(gridBtn);
+    });
+
+    updateProgress();
+  }
+
+  window.scrollToQuestion = function(qId) {
+    const el = document.getElementById(`qCard_${qId}`);
+    if (el) {
+      el.scrollIntoView({ behavior: "smooth", block: "start" });
+    }
+  };
+
+  /* ================= 5. INTERACTION LOGIC ================= */
+  window.selectAnswer = function(qId, key) {
+    if (state.isSubmitted) return;
+
+    state.answers[qId] = key;
+
+    const card = document.getElementById(`qCard_${qId}`);
+    if (card) {
+      const options = card.querySelectorAll(".option-item");
+      options.forEach(opt => opt.classList.remove("selected"));
+    }
+
+    const chosenOpt = document.getElementById(`opt_${qId}_${key}`);
+    if (chosenOpt) {
+      chosenOpt.classList.add("selected");
+      const radio = chosenOpt.querySelector("input[type=radio]");
+      if (radio) radio.checked = true;
+    }
+
+    const gridBtn = document.getElementById(`gridBtn_${qId}`);
+    if (gridBtn) {
+      gridBtn.classList.add("answered");
+    }
+
+    updateProgress();
+  };
+
+  window.toggleFlag = function(qId) {
+    const card = document.getElementById(`qCard_${qId}`);
+    const flagBtn = document.getElementById(`btnFlag_${qId}`);
+    const gridBtn = document.getElementById(`gridBtn_${qId}`);
+
+    if (state.flags.has(qId)) {
+      state.flags.delete(qId);
+      if (card) card.classList.remove("flagged");
+      if (flagBtn) flagBtn.classList.remove("active");
+      if (gridBtn) gridBtn.classList.remove("flagged");
+    } else {
+      state.flags.add(qId);
+      if (card) card.classList.add("flagged");
+      if (flagBtn) flagBtn.classList.add("active");
+      if (gridBtn) gridBtn.classList.add("flagged");
+    }
+  };
+
+  function updateProgress() {
+    const answeredCount = Object.keys(state.answers).length;
+    const total = (typeof questionsData !== "undefined") ? questionsData.length : 40;
+    const percent = Math.round((answeredCount / total) * 100);
+
+    // Update Header Pill: Đã làm: 0/40
+    if (headerProgressEl) headerProgressEl.textContent = `${answeredCount}/${total}`;
+
+    // Update Sidebar progress
+    if (progressText) progressText.textContent = `Đã làm: ${answeredCount} / ${total} câu (${percent}%)`;
+    if (progressBarFill) progressBarFill.style.width = `${percent}%`;
+  }
+
+  /* ================= 6. SUBMISSION & RESULTS ================= */
+  window.promptSubmit = function() {
+    if (state.isSubmitted) {
+      alert("Bạn đã hoàn thành và nộp bài thi này rồi.");
+      return;
+    }
+
+    const total = questionsData.length;
+    const answeredCount = Object.keys(state.answers).length;
+    const unansweredCount = total - answeredCount;
+
+    const modalBody = document.getElementById("submitModalBody");
+    if (!modalBody) return;
+
+    if (unansweredCount > 0) {
+      const unansweredIds = [];
+      for (let i = 1; i <= total; i++) {
+        if (!state.answers[i]) unansweredIds.push(i);
+      }
+      modalBody.innerHTML = `
+        <div style="color: #dc2626; font-weight: 700; margin-bottom: 8px;">
+          ⚠️ Bạn còn <strong>${unansweredCount}</strong> câu chưa trả lời!
+        </div>
+        <p>Các câu chưa làm: <strong>${unansweredIds.join(", ")}</strong></p>
+        <p style="margin-top: 10px;">Chỉ sau khi nộp bài bạn mới xem được đáp án đúng, giải thích và bản dịch nghĩa.</p>
+        <p style="margin-top: 6px; font-weight: 600;">Bạn có chắc chắn muốn nộp bài ngay bây giờ?</p>
+      `;
+    } else {
+      modalBody.innerHTML = `
+        <div style="color: #16a34a; font-weight: 700; margin-bottom: 8px;">
+          🎉 Bạn đã hoàn thành tất cả ${total}/${total} câu hỏi!
+        </div>
+        <p>Sau khi nộp bài, hệ thống sẽ chấm điểm và hiển thị toàn bộ đáp án chính xác, giải thích chi tiết và dịch nghĩa.</p>
+        <p style="margin-top: 10px; font-weight: 600;">Bạn có muốn nộp bài để xem kết quả?</p>
+      `;
+    }
+
+    if (submitConfirmModal) submitConfirmModal.classList.add("open");
+  };
+
+  window.closeSubmitModal = function() {
+    if (submitConfirmModal) submitConfirmModal.classList.remove("open");
+  };
+
+  window.confirmSubmit = function() {
+    closeSubmitModal();
+    submitExam();
+  };
+
+  function submitExam() {
+    state.isSubmitted = true;
+    clearInterval(state.timerInterval);
+
+    const totalDurationSeconds = Math.max(1, state.elapsedSeconds);
+    const durationMins = Math.floor(totalDurationSeconds / 60);
+    const durationSecs = totalDurationSeconds % 60;
+    const timeFormatted = `${durationMins} phút ${durationSecs} giây`;
+
+    let correctCount = 0;
+    questionsData.forEach(q => {
+      if (state.answers[q.id] === q.correct) {
+        correctCount++;
+      }
+    });
+
+    const total = questionsData.length;
+    const wrongCount = total - correctCount;
+    const scale10 = ((correctCount / total) * 10).toFixed(1);
+    const percentage = Math.round((correctCount / total) * 100);
+
+    let rating = "";
+    if (scale10 >= 9.0) rating = "Xuất sắc 🌟";
+    else if (scale10 >= 8.0) rating = "Giỏi 🎯";
+    else if (scale10 >= 6.5) rating = "Khá 👍";
+    else if (scale10 >= 5.0) rating = "Trung bình 📚";
+    else rating = "Cần cố gắng rèn luyện thêm ✍️";
+
+    if (scoreRawEl) scoreRawEl.textContent = `${correctCount}/${total}`;
+    if (scoreScale10El) scoreScale10El.textContent = `Điểm hệ 10: ${scale10} / 10`;
+    if (scorePercentageEl) scorePercentageEl.textContent = `${percentage}%`;
+    if (timeTakenEl) timeTakenEl.textContent = timeFormatted;
+    if (scoreRatingEl) scoreRatingEl.textContent = rating;
+    if (correctCountEl) correctCountEl.textContent = `${correctCount} câu`;
+    if (wrongCountEl) wrongCountEl.textContent = `${wrongCount} câu`;
+
+    if (resultsSummaryCard) resultsSummaryCard.style.display = "block";
+    if (reviewFilterBar) reviewFilterBar.style.display = "flex";
+
+    const sidebarSubmitBtn = document.getElementById("btnSidebarSubmit");
+    if (sidebarSubmitBtn) {
+      sidebarSubmitBtn.textContent = "✓ ĐÃ NỘP BÀI THI";
+      sidebarSubmitBtn.style.background = "#10b981";
+      sidebarSubmitBtn.style.boxShadow = "none";
+      sidebarSubmitBtn.disabled = true;
+    }
+
+    // UNLOCK EXPLANATIONS & TRANSLATIONS FOR ALL QUESTIONS
+    questionsData.forEach(q => {
+      const qId = q.id;
+      const userChoice = state.answers[qId];
+      const isCorrect = (userChoice === q.correct);
+
+      const card = document.getElementById(`qCard_${qId}`);
+      const statusTag = document.getElementById(`statusTag_${qId}`);
+      const solutionBox = document.getElementById(`solution_${qId}`);
+      const gridBtn = document.getElementById(`gridBtn_${qId}`);
+
+      if (solutionBox) solutionBox.style.display = "block";
+
+      if (card) {
+        if (isCorrect) {
+          card.classList.add("correct-card");
+          if (statusTag) {
+            statusTag.className = "question-status-tag correct";
+            statusTag.textContent = "ĐÚNG ✓";
+          }
+          if (gridBtn) {
+            gridBtn.className = "grid-btn grid-correct";
+          }
+        } else {
+          card.classList.add("incorrect-card");
+          if (statusTag) {
+            statusTag.className = "question-status-tag incorrect";
+            statusTag.textContent = userChoice ? "SAI ✗" : "CHƯA TRẢ LỜI ✗";
+          }
+          if (gridBtn) {
+            gridBtn.className = "grid-btn grid-incorrect";
+          }
+        }
+      }
+
+      Object.keys(q.options).forEach(key => {
+        const optEl = document.getElementById(`opt_${qId}_${key}`);
+        if (!optEl) return;
+
+        if (key === q.correct) {
+          optEl.classList.add("option-correct");
+        }
+        if (userChoice === key && key !== q.correct) {
+          optEl.classList.add("option-wrong-choice");
+        }
+      });
+    });
+
+    saveSubmissionHistory({
+      name: state.student.name || "Ẩn danh",
+      id: state.student.id || "N/A",
+      classroom: state.student.classroom || "N/A",
+      score: `${correctCount}/${total}`,
+      scale10: scale10,
+      time: timeFormatted,
+      date: new Date().toLocaleString("vi-VN")
+    });
+
+    if (resultsSummaryCard) {
+      resultsSummaryCard.scrollIntoView({ behavior: "smooth", block: "center" });
+    }
+  }
+
+  /* ================= 7. FILTERING REVIEW QUESTIONS ================= */
+  window.filterQuestions = function(mode) {
+    state.filterMode = mode;
+
+    document.querySelectorAll(".filter-pill").forEach(pill => {
+      pill.classList.remove("active");
+    });
+    const activePill = document.getElementById(`filter_${mode}`);
+    if (activePill) activePill.classList.add("active");
+
+    questionsData.forEach(q => {
+      const card = document.getElementById(`qCard_${q.id}`);
+      if (!card) return;
+      const isCorrect = (state.answers[q.id] === q.correct);
+
+      if (mode === 'all') {
+        card.style.display = "block";
+      } else if (mode === 'correct') {
+        card.style.display = isCorrect ? "block" : "none";
+      } else if (mode === 'incorrect') {
+        card.style.display = !isCorrect ? "block" : "none";
+      }
+    });
+  };
+
+  /* ================= 8. RETAKE, EXPORT & PRINT ================= */
+  window.retakeQuiz = function() {
+    if (confirm("Bạn có chắc chắn muốn làm lại bài thi từ đầu? Toàn bộ kết quả hiện tại sẽ được đặt lại.")) {
+      state.answers = {};
+      state.flags.clear();
+      state.isSubmitted = false;
+      state.elapsedSeconds = 0;
+      state.filterMode = 'all';
+
+      if (resultsSummaryCard) resultsSummaryCard.style.display = "none";
+      if (reviewFilterBar) reviewFilterBar.style.display = "none";
+
+      const sidebarSubmitBtn = document.getElementById("btnSidebarSubmit");
+      if (sidebarSubmitBtn) {
+        sidebarSubmitBtn.textContent = "NỘP BÀI THI";
+        sidebarSubmitBtn.style.background = "var(--tdc-amber)";
+        sidebarSubmitBtn.disabled = false;
+      }
+
+      renderQuestions();
+      updateTimerDisplay();
+      startTimer();
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    }
+  };
+
+  window.printResults = function() {
+    window.print();
+  };
+
+  window.exportResultsCSV = function() {
+    let correctCount = 0;
+    questionsData.forEach(q => {
+      if (state.answers[q.id] === q.correct) correctCount++;
+    });
+
+    const total = questionsData.length;
+    const scale10 = ((correctCount / total) * 10).toFixed(1);
+
+    const rows = [
+      ["BẢNG KẾT QUẢ KIỂM TRA TA2 - SENTENCE BUILDING"],
+      ["Trường Cao đẳng Công nghệ Thủ Đức (TDC)"],
+      [""],
+      ["Họ và tên", state.student.name || "N/A"],
+      ["Mã số sinh viên", state.student.id || "N/A"],
+      ["Lớp", state.student.classroom || "N/A"],
+      ["Điểm số", `${correctCount}/${total}`],
+      ["Điểm hệ 10", scale10],
+      ["Thời gian hoàn thành", `${Math.floor(state.elapsedSeconds / 60)} phút ${state.elapsedSeconds % 60} giây`],
+      ["Thời gian nộp bài", new Date().toLocaleString("vi-VN")],
+      [""],
+      ["Câu hỏi", "Lựa chọn của SV", "Đáp án đúng", "Kết quả"]
+    ];
+
+    questionsData.forEach(q => {
+      const userChoice = state.answers[q.id] || "Chưa làm";
+      const isCorrect = (userChoice === q.correct) ? "ĐÚNG" : "SAI";
+      rows.push([`Câu ${q.id}`, userChoice, q.correct, isCorrect]);
+    });
+
+    const csvContent = "\uFEFF" + rows.map(e => e.map(item => `"${item}"`).join(",")).join("\n");
+    const blob = new Blob([csvContent], { type: "text/csv;charset=utf-8;" });
+    const url = URL.createObjectURL(blob);
+    const link = document.createElement("a");
+    const safeName = (state.student.name || "SinhVien").replace(/\s+/g, "_");
+    link.setAttribute("href", url);
+    link.setAttribute("download", `KetQua_TA2_SentenceBuilding_${safeName}_${Date.now()}.csv`);
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+  };
+
+  /* ================= 9. TEACHER & ADMIN MODAL ================= */
+  function saveSubmissionHistory(record) {
+    try {
+      const list = JSON.parse(safeStorage.getItem("tdc_ta2_submissions_history", "[]"));
+      list.unshift(record);
+      safeStorage.setItem("tdc_ta2_submissions_history", JSON.stringify(list.slice(0, 50)));
+    } catch (e) {}
+  }
+
+  window.openTeacherModal = function() {
+    const totalViews = state.visitorCount || safeStorage.getItem("tdc_ta2_cached_visits", 1);
+    const adminTotal = document.getElementById("teacherVisitorTotal");
+    if (adminTotal) adminTotal.textContent = totalViews;
+
+    const historyList = JSON.parse(safeStorage.getItem("tdc_ta2_submissions_history", "[]"));
+    const container = document.getElementById("teacherSubmissionsList");
+
+    if (container) {
+      if (historyList.length === 0) {
+        container.innerHTML = `<p style="color: #64748b; font-style: italic; padding: 10px 0;">Chưa có lượt nộp bài nào được lưu trên thiết bị này.</p>`;
+      } else {
+        container.innerHTML = historyList.map((item, idx) => `
+          <div style="padding: 8px 12px; background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 6px; margin-bottom: 6px; font-size: 0.85rem;">
+            <strong>#${idx + 1} - ${item.name}</strong> (${item.id} - ${item.classroom}): 
+            <span style="color: #15803d; font-weight: 700;">${item.score} (${item.scale10}đ)</span> 
+            - <span style="color: #64748b;">${item.date}</span>
+          </div>
+        `).join("");
+      }
+    }
+
+    if (teacherModal) teacherModal.classList.add("open");
+  };
+
+  window.closeTeacherModal = function() {
+    if (teacherModal) teacherModal.classList.remove("open");
+  };
+
+  /* ================= INITIALIZATION ================= */
+  initVisitorCounter();
+  updateStudentDisplay();
+  renderQuestions();
+  updateTimerDisplay();
+  startTimer();
+});
+  </script>
 </body>
 </html>
