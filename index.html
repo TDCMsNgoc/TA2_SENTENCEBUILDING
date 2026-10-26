@@ -1,0 +1,416 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>TA2 - SENTENCE BUILDING | Trường Cao Đẳng Công Nghệ Thủ Đức (TDC)</title>
+  <link rel="icon" type="image/png" href="logo-tdc.png">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+  <!-- ================= TOP HEADER ================= -->
+  <header class="header-wrapper">
+    <div class="header-container">
+      <!-- Left: TDC Logo & ONLY "TA2 - SENTENCE BUILDING" -->
+      <div class="brand-section">
+        <div class="logo-white-card">
+          <img src="logo-tdc.png" alt="TDC Logo" class="tdc-logo-img">
+        </div>
+        <div class="brand-title-wrap">
+          <span class="brand-main-title">TA2 - SENTENCE BUILDING</span>
+        </div>
+      </div>
+
+      <!-- Right: Timer, Counter, Student & Admin controls -->
+      <div class="header-controls">
+        <!-- Status Pill: Timer & Progress -->
+        <div class="status-pill-group">
+          <div class="status-pill-item" title="Thời gian làm bài">
+            <span>⏱️</span>
+            <span class="timer-digits" id="timerDisplay">00:00</span>
+          </div>
+          <div class="status-divider"></div>
+          <div class="status-pill-item" title="Tiến độ trả lời">
+            <span>📝</span>
+            <span class="highlight-val" id="headerProgress">0/40</span>
+          </div>
+        </div>
+
+        <!-- Visitor Counter Pill (Live Count) -->
+        <div class="visitor-pill" id="visitorPill" onclick="openTeacherModal()" title="Số lượt sinh viên truy cập (Nhấn để xem quản lý)">
+          <span class="live-green-dot"></span>
+          <span>Truy cập:</span>
+          <strong class="highlight-val" id="visitorCount">1</strong>
+        </div>
+
+        <!-- Student Info Button -->
+        <button type="button" class="btn-student-info" id="btnStudentInfo" onclick="openStudentModal()">
+          <span>📝</span>
+          <span>Nhập Họ tên & MSSV</span>
+        </button>
+
+        <!-- Teacher / Admin Center Button -->
+        <button type="button" class="btn-admin-panel" id="btnAdminPanel" onclick="openTeacherModal()" title="Bảng điều khiển Giảng viên">
+          <span>⚙️</span>
+          <span>Giảng viên</span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- ================= OVERLAY: EXAM LOCKED BY TEACHER ================= -->
+  <div class="exam-locked-overlay" id="examLockedOverlay">
+    <div class="locked-card">
+      <div style="font-size: 3rem;">🔒</div>
+      <h2>PHÒNG THI ĐANG TẠM KHÓA</h2>
+      <p>
+        Phòng thi trắc nghiệm <strong>TA2 - SENTENCE BUILDING</strong> hiện đang được tạm khóa bởi Giảng viên phụ trách.
+        Vui lòng liên hệ Thầy/Cô để được mở lại thời gian làm bài.
+      </p>
+      <button type="button" class="btn-modal-save" onclick="openTeacherModal()" style="background: #b91c1c;">
+        Mở khóa (Dành cho Giảng viên)
+      </button>
+    </div>
+  </div>
+
+  <!-- ================= OVERLAY: ROOM PASSCODE REQUIRED ================= -->
+  <div class="passcode-overlay" id="passcodeOverlay">
+    <div class="passcode-card">
+      <div style="font-size: 2.8rem; color: var(--tdc-navy);">🔑</div>
+      <h3>YÊU CẦU MÃ PHÒNG THI</h3>
+      <p>Giảng viên đã bật chế độ bảo vệ. Vui lòng nhập mã phòng thi do Giảng viên cung cấp trên lớp để vào làm bài:</p>
+      <input type="text" id="inputPasscode" class="passcode-input" placeholder="NHẬP MÃ TẠI ĐÂY" autocomplete="off" onkeydown="if(event.key==='Enter') verifyPasscode()">
+      <div id="passcodeError" style="color: #ef4444; font-size: 0.88rem; font-weight: 700; margin-bottom: 14px; display: none;"></div>
+      <div>
+        <button type="button" class="btn-modal-save" style="width: 100%; padding: 12px; font-size: 1rem;" onclick="verifyPasscode()">
+          XÁC NHẬN VÀO THI
+        </button>
+      </div>
+      <div style="margin-top: 15px; font-size: 0.8rem; color: #94a3b8;">
+        (Dành cho Giảng viên: Bấm <a href="javascript:void(0)" onclick="openTeacherModal()" style="color: var(--tdc-navy); font-weight: 700;">vào đây</a> để quản lý mã)
+      </div>
+    </div>
+  </div>
+
+  <!-- ================= MAIN CONTENT ================= -->
+  <main class="main-layout">
+    <!-- Left Column: Meta, Results & Questions -->
+    <div class="left-content-area">
+
+      <!-- Exam Meta Card -->
+      <div class="exam-meta-card">
+        <div class="exam-meta-left">
+          <div class="exam-subject-name">BÀI KIỂM TRA TRẮC NGHIỆM: TA2 - SENTENCE BUILDING</div>
+          <div class="exam-meta-sub">
+            Gồm 40 câu trắc nghiệm xây dựng câu hoàn chỉnh • Hoàn thành tất cả các câu và nộp bài để xem đáp án có lời giải thích chi tiết & dịch nghĩa
+          </div>
+        </div>
+        <div class="student-info-tags">
+          <div class="student-tag">Họ tên: <strong id="studentNameDisplay">Chưa nhập</strong></div>
+          <div class="student-tag">MSSV: <strong id="studentIdDisplay">Chưa nhập</strong></div>
+          <div class="student-tag">Lớp: <strong id="studentClassDisplay">Chưa nhập</strong></div>
+        </div>
+      </div>
+
+      <!-- Results Summary Card (STRICTLY SHOWN ONLY AFTER SUBMIT) -->
+      <section class="results-summary-card" id="resultsSummaryCard">
+        <div class="results-grid">
+          <!-- Score Circle -->
+          <div class="score-circle-container">
+            <div class="score-display" id="scoreRaw">0/40</div>
+            <div class="score-scale-10" id="scoreScale10">0.0 / 10</div>
+            <div style="font-size: 0.85rem; opacity: 0.85; margin-top: 4px;">Điểm quy đổi hệ 10</div>
+          </div>
+
+          <!-- Stats 1: Percentage -->
+          <div class="result-stat-box">
+            <div class="result-stat-value" id="scorePercentage" style="color: #67e8f9;">0%</div>
+            <div class="result-stat-label">Tỷ lệ chính xác</div>
+          </div>
+
+          <!-- Stats 2: Correct / Wrong -->
+          <div class="result-stat-box">
+            <div class="result-stat-value" style="color: #4ade80;">
+              <span id="correctCount">0</span> <span style="font-size: 0.9rem; color: #f87171;">/ <span id="wrongCount">0</span> sai</span>
+            </div>
+            <div class="result-stat-label">Số câu Đúng / Sai</div>
+          </div>
+
+          <!-- Stats 3: Time Taken -->
+          <div class="result-stat-box">
+            <div class="result-stat-value" id="timeTaken" style="color: #fde047;">0m 00s</div>
+            <div class="result-stat-label">Thời gian hoàn thành</div>
+          </div>
+
+          <!-- Stats 4: Rating -->
+          <div class="result-stat-box">
+            <div class="result-stat-value" id="scoreRating" style="font-size: 1.25rem;">Đạt</div>
+            <div class="result-stat-label">Đánh giá năng lực</div>
+          </div>
+        </div>
+
+        <!-- Post-submit Actions -->
+        <div class="result-actions">
+          <button type="button" class="btn-result-action btn-retake" onclick="retakeQuiz()">
+            <span>🔄</span> <span>Làm lại bài thi</span>
+          </button>
+          <button type="button" class="btn-result-action" onclick="printResults()">
+            <span>🖨️</span> <span>In / Lưu PDF bảng điểm</span>
+          </button>
+          <button type="button" class="btn-result-action" onclick="exportResultsCSV()">
+            <span>📥</span> <span>Xuất file Excel (CSV)</span>
+          </button>
+        </div>
+      </section>
+
+      <!-- Review Filter Bar (STRICTLY SHOWN ONLY AFTER SUBMIT) -->
+      <div class="review-filter-bar" id="reviewFilterBar">
+        <div style="font-size: 0.9rem; font-weight: 700; color: var(--tdc-navy);">
+          🔍 Xem lại bài làm:
+        </div>
+        <div class="filter-btn-group">
+          <button type="button" class="filter-pill active" id="filter_all" onclick="filterQuestions('all')">
+            Tất cả (40)
+          </button>
+          <button type="button" class="filter-pill" id="filter_correct" onclick="filterQuestions('correct')">
+            Câu đúng ✓
+          </button>
+          <button type="button" class="filter-pill" id="filter_incorrect" onclick="filterQuestions('incorrect')">
+            Câu sai ✗
+          </button>
+          <button type="button" class="filter-pill" id="filter_flagged" onclick="filterQuestions('flagged')">
+            Đã đánh dấu ★
+          </button>
+        </div>
+      </div>
+
+      <!-- Questions List Container -->
+      <div class="questions-list" id="questionsContainer">
+        <!-- Rendered dynamically by app.js -->
+      </div>
+    </div>
+
+    <!-- Right Column: Sticky Navigation Sidebar -->
+    <aside class="sidebar-sticky">
+      <div class="sidebar-title">
+        <span>BẢNG ĐIỀU HƯỚNG CÂU HỎI</span>
+        <span style="font-size: 0.88rem; color: var(--tdc-amber); font-weight: 800;" id="progressText">0/40</span>
+      </div>
+
+      <!-- Progress Bar -->
+      <div class="progress-bar-container">
+        <div class="progress-bar-fill" id="progressBarFill"></div>
+      </div>
+
+      <!-- 40 Questions Grid -->
+      <div class="questions-grid" id="questionsGrid">
+        <!-- 40 buttons rendered dynamically by app.js -->
+      </div>
+
+      <!-- Main Submit Button -->
+      <button type="button" class="btn-submit-main" id="btnSidebarSubmit" onclick="requestSubmitQuiz()">
+        <span>📤</span>
+        <span>NỘP BÀI THI</span>
+      </button>
+
+      <!-- Legend -->
+      <div class="sidebar-legend">
+        <div class="legend-item">
+          <div class="legend-swatch answered"></div>
+          <span>Đã chọn đáp án</span>
+        </div>
+        <div class="legend-item">
+          <div class="legend-swatch"></div>
+          <span>Chưa trả lời</span>
+        </div>
+        <div class="legend-item">
+          <div class="legend-swatch flagged"></div>
+          <span>Đã đánh dấu xem lại</span>
+        </div>
+        <div class="legend-item" style="margin-top: 4px;">
+          <div class="legend-swatch correct"></div>
+          <span>Đúng (Sau khi nộp)</span>
+        </div>
+        <div class="legend-item">
+          <div class="legend-swatch incorrect"></div>
+          <span>Sai (Sau khi nộp)</span>
+        </div>
+      </div>
+    </aside>
+  </main>
+
+  <!-- ================= MODAL: STUDENT INFO ================= -->
+  <div class="modal-overlay" id="studentModal">
+    <div class="modal-box">
+      <div class="modal-header">
+        <div class="modal-title">📝 Thông tin sinh viên làm bài</div>
+        <button type="button" class="btn-close-modal" onclick="closeStudentModal()">&times;</button>
+      </div>
+      <form onsubmit="saveStudentInfo(event)">
+        <div class="form-group">
+          <label class="form-label" for="inputStudentName">Họ và tên sinh viên: <span style="color:#ef4444;">*</span></label>
+          <input type="text" id="inputStudentName" class="form-input" placeholder="Ví dụ: Nguyễn Văn A" required>
+        </div>
+        <div class="form-group">
+          <label class="form-label" for="inputStudentId">Mã số sinh viên (MSSV): <span style="color:#ef4444;">*</span></label>
+          <input type="text" id="inputStudentId" class="form-input" placeholder="Ví dụ: 23CD0123" required>
+        </div>
+        <div class="form-group">
+          <label class="form-label" for="inputStudentClass">Lớp học phần:</label>
+          <input type="text" id="inputStudentClass" class="form-input" placeholder="Ví dụ: TA2_N01">
+        </div>
+        <div class="modal-actions">
+          <button type="button" class="btn-modal-cancel" onclick="closeStudentModal()">Đóng</button>
+          <button type="submit" class="btn-modal-save">Lưu thông tin</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- ================= MODAL: INCOMPLETE QUESTIONS WARNING ================= -->
+  <div class="modal-overlay" id="incompleteModal">
+    <div class="modal-box">
+      <div class="modal-header">
+        <div class="modal-title" style="color: #b91c1c;">⚠️ BÀI THI CHƯA HOÀN TẤT</div>
+        <button type="button" class="btn-close-modal" onclick="closeIncompleteModal()">&times;</button>
+      </div>
+      <div>
+        <p style="color: #334155; font-size: 0.95rem; margin-bottom: 12px; line-height: 1.55;">
+          Bạn còn <strong style="color: #ef4444;" id="unansweredCountDisplay">0</strong> câu hỏi chưa chọn đáp án.
+        </p>
+        <p style="color: #64748b; font-size: 0.88rem; margin-bottom: 14px;">
+          Theo quy định, bạn cần hoàn thành đủ <strong>40/40 câu</strong> trước khi nộp bài để được mở khóa đáp án, lời giải thích chi tiết và dịch nghĩa:
+        </p>
+        <div style="max-height: 140px; overflow-y: auto; background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 6px; padding: 10px; display: flex; flex-wrap: wrap; gap: 6px;" id="unansweredQuestionsList">
+          <!-- Missing buttons -->
+        </div>
+      </div>
+      <div class="modal-actions" style="margin-top: 18px;">
+        <button type="button" class="btn-modal-save" style="background: var(--tdc-amber); color: #0f172a;" onclick="closeIncompleteModal()">
+          Tiếp tục làm bài
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ================= MODAL: SUBMISSION CONFIRMATION ================= -->
+  <div class="modal-overlay" id="submitConfirmModal">
+    <div class="modal-box">
+      <div class="modal-header">
+        <div class="modal-title">📤 Xác nhận nộp bài thi</div>
+        <button type="button" class="btn-close-modal" onclick="closeSubmitConfirmModal()">&times;</button>
+      </div>
+      <div>
+        <p style="color: #334155; font-size: 0.95rem; margin-bottom: 10px; line-height: 1.6;">
+          Bạn đã hoàn thành toàn bộ <strong>40/40 câu hỏi</strong>.
+        </p>
+        <p style="color: #15803d; font-size: 0.9rem; font-weight: 600; background: #f0fdf4; border: 1px solid #bbf7d0; padding: 10px 12px; border-radius: 6px;">
+          ✓ Ngay sau khi bấm xác nhận, hệ thống sẽ chấm điểm và mở khóa toàn bộ đáp án đúng kèm lời giải thích chi tiết và bản dịch tiếng Việt cho từng câu.
+        </p>
+      </div>
+      <div class="modal-actions" style="margin-top: 18px;">
+        <button type="button" class="btn-modal-cancel" onclick="closeSubmitConfirmModal()">Kiểm tra lại</button>
+        <button type="button" class="btn-modal-save" style="background: #10b981;" onclick="confirmSubmitQuiz()">
+          Đồng ý nộp bài
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ================= MODAL: TEACHER CONTROL PANEL ================= -->
+  <div class="modal-overlay" id="teacherModal">
+    <div class="modal-box modal-large">
+      <div class="modal-header">
+        <div class="modal-title">⚙️ BẢNG ĐIỀU KHIỂN & GIÁM SÁT DÀNH CHO GIẢNG VIÊN</div>
+        <button type="button" class="btn-close-modal" onclick="closeTeacherModal()">&times;</button>
+      </div>
+
+      <div style="max-height: 480px; overflow-y: auto; padding-right: 4px;">
+        <!-- Card 1: Visitor Control -->
+        <div style="background: #f0fdf4; border: 1px solid #bbf7d0; border-radius: 8px; padding: 14px; margin-bottom: 14px;">
+          <h4 style="color: #166534; font-size: 0.98rem; margin-bottom: 6px; display: flex; align-items: center; gap: 6px;">
+            <span>👁️</span> <span>Kiểm soát số lượng sinh viên truy cập</span>
+          </h4>
+          <p style="font-size: 0.88rem; color: #14532d; line-height: 1.5;">
+            Tổng số lượt truy cập ghi nhận trên hệ thống: 
+            <strong style="font-size: 1.3rem; color: #15803d; margin-left: 5px;" id="teacherVisitorTotal">0</strong> lượt
+          </p>
+          <div style="margin-top: 6px; font-size: 0.8rem; color: #475569;">
+            API Counter trực tiếp: 
+            <a href="https://api.counterapi.dev/v1/tdc-ta2-sentence-building/page-visits" target="_blank" style="color: #0369a1; text-decoration: underline; font-weight: 600;">
+              https://api.counterapi.dev/v1/tdc-ta2-sentence-building/page-visits
+            </a>
+          </div>
+        </div>
+
+        <!-- Card 2: Access & Security Controls -->
+        <div style="background: #ffffff; border: 1px solid #e2e8f0; border-radius: 8px; padding: 14px; margin-bottom: 14px;">
+          <h4 style="color: var(--tdc-navy); font-size: 0.98rem; margin-bottom: 12px; display: flex; align-items: center; gap: 6px;">
+            <span>🛡️</span> <span>Cài đặt bảo mật & Quyền vào làm bài</span>
+          </h4>
+
+          <div style="display: flex; flex-direction: column; gap: 12px;">
+            <!-- Lock Exam Toggle -->
+            <label style="display: flex; align-items: center; gap: 10px; cursor: pointer; font-size: 0.9rem;">
+              <input type="checkbox" id="adminToggleLock" style="width: 18px; height: 18px;">
+              <span><strong>Tạm khóa phòng thi</strong> (Sinh viên không thể truy cập vào làm bài)</span>
+            </label>
+
+            <!-- Require Passcode Toggle -->
+            <label style="display: flex; align-items: center; gap: 10px; cursor: pointer; font-size: 0.9rem;">
+              <input type="checkbox" id="adminTogglePasscode" style="width: 18px; height: 18px;">
+              <span><strong>Bắt buộc nhập Mã phòng thi</strong> (Chỉ sinh viên có mã mới vào làm bài được)</span>
+            </label>
+
+            <!-- Passcode Input -->
+            <div style="display: flex; align-items: center; gap: 10px; padding-left: 28px;">
+              <span style="font-size: 0.85rem; color: #475569;">Mã phòng thi hiện tại:</span>
+              <input type="text" id="adminInputPasscode" class="form-input" style="width: 180px; padding: 6px 10px; font-weight: 700; text-transform: uppercase;" placeholder="VD: TDC2026">
+            </div>
+
+            <!-- Change Admin PIN -->
+            <div style="display: flex; align-items: center; gap: 10px; padding-left: 28px; border-top: 1px dashed #e2e8f0; padding-top: 10px;">
+              <span style="font-size: 0.85rem; color: #475569;">Đổi mã PIN Quản lý mới:</span>
+              <input type="password" id="adminInputNewPin" class="form-input" style="width: 180px; padding: 6px 10px;" placeholder="Bỏ trống nếu giữ cũ">
+            </div>
+          </div>
+
+          <div style="margin-top: 14px; text-align: right;">
+            <button type="button" class="btn-modal-save" onclick="saveAdminSettings()">Lưu cài đặt bảo mật</button>
+          </div>
+        </div>
+
+        <!-- Card 3: Student Submissions Tracking -->
+        <div style="background: #ffffff; border: 1px solid #e2e8f0; border-radius: 8px; padding: 14px;">
+          <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px; flex-wrap: wrap; gap: 8px;">
+            <h4 style="color: var(--tdc-navy); font-size: 0.98rem; display: flex; align-items: center; gap: 6px;">
+              <span>📋</span> <span>Danh sách bài thi đã nộp</span>
+            </h4>
+            <div style="display: flex; gap: 6px;">
+              <button type="button" class="btn-modal-save" style="padding: 5px 12px; font-size: 0.82rem; background: #0284c7;" onclick="exportAllSubmissionsCSV()">
+                Xuất file Excel (CSV)
+              </button>
+              <button type="button" class="btn-modal-cancel" style="padding: 5px 10px; font-size: 0.82rem; color: #b91c1c;" onclick="clearAllSubmissions()">
+                Xóa lịch sử
+              </button>
+            </div>
+          </div>
+
+          <div id="teacherSubmissionsList" style="max-height: 200px; overflow-y: auto;">
+            <!-- Submissions list -->
+          </div>
+        </div>
+      </div>
+
+      <div class="modal-actions" style="margin-top: 16px;">
+        <button type="button" class="btn-modal-cancel" onclick="closeTeacherModal()">Đóng cửa sổ</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Scripts -->
+  <script src="js/questions.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>
